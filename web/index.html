@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    
+    <!-- PWA Meta Tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#7c3aed" />
+    <meta name="background-color" content="#ffffff" />
+    <meta name="display" content="standalone" />
+    <meta name="orientation" content="portrait-primary" />
+    
+    <!-- App Information -->
+    <title>YKS Akıllı Asistanı - AI Destekli Çalışma Planlayıcı</title>
+    <meta name="description" content="Yapay zeka destekli adaptif YKS çalışma planlayıcısı. Kişiselleştirilmiş ders programları, performans analizi ve akıllı öneriler." />
+    <meta name="keywords" content="YKS, üniversite sınavı, çalışma planı, AI asistan, yapay zeka, eğitim, öğrenme" />
+    <meta name="author" content="YKS AI Assistant Team" />
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://yks-ai-assistant.vercel.app/" />
+    <meta property="og:title" content="YKS Akıllı Asistanı - AI Destekli Çalışma Planlayıcısı" />
+    <meta property="og:description" content="Yapay zeka ile kişiselleştirilmiş YKS çalışma planları. Adaptif öğrenme, performans analizi ve akıllı öneriler." />
+    <meta property="og:image" content="/icons/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://yks-ai-assistant.vercel.app/" />
+    <meta name="twitter:title" content="YKS Akıllı Asistanı" />
+    <meta name="twitter:description" content="AI destekli adaptif YKS çalışma planlayıcısı" />
+    <meta name="twitter:image" content="/icons/twitter-card.png" />
+    
+    <!-- Apple Specific -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="YKS AI Asistan" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <link rel="apple-touch-startup-image" href="/icons/apple-splash-2048-2732.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" />
+    
+    <!-- Microsoft -->
+    <meta name="msapplication-TileColor" content="#7c3aed" />
+    <meta name="msapplication-TileImage" content="/icons/icon-144x144.png" />
+    <meta name="msapplication-config" content="/browserconfig.xml" />
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
+    
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- DNS Prefetch -->
+    <link rel="dns-prefetch" href="//api.openai.com" />
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    
+    <!-- Security -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data: https:; connect-src 'self' https:;">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    
+    <!-- Performance Hints -->
+    <link rel="prefetch" href="/icons/icon-192x192.png" />
+    <link rel="prefetch" href="/icons/icon-512x512.png" />
+    
+    <!-- Critical CSS (inline for performance) -->
+    <style>
+      /* Loading spinner and critical path styles */
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        background: #ffffff;
+        color: #1e293b;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      
+      #root {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      /* Loading Screen */
+      .app-loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        color: white;
+        text-align: center;
+      }
+      
+      .app-loading-logo {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        animation: pulse 2s infinite;
+      }
+      
+      .app-loading-text {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 2rem;
+      }
+      
+      .app-loading-spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-top: 3px solid white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      
+      /* PWA Install Button */
+      .pwa-install-prompt {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        background: #7c3aed;
+        color: white;
+        padding: 16px;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        transform: translateY(100px);
+        transition: transform 0.3s ease;
+        display: none;
+      }
+      
+      .pwa-install-prompt.show {
+        display: block;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loading Screen -->
+    <div id="app-loading" class="app-loading">
+      <div class="app-loading-logo">🧠</div>
+      <div class="app-loading-text">YKS Akıllı Asistanı</div>
+      <div class="app-loading-spinner"></div>
+    </div>
+    
+    <!-- PWA Install Prompt -->
+    <div id="pwa-install-prompt" class="pwa-install-prompt">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div style="font-size: 24px;">📱</div>
+        <div style="flex: 1;">
+          <div style="font-weight: 600; margin-bottom: 4px;">Uygulamayı Yükle</div>
+          <div style="font-size: 12px; opacity: 0.9;">Ana ekranına ekle ve offline kullan</div>
+        </div>
+        <button id="pwa-install-btn" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 8px 16px; border-radius: 8px; cursor: pointer;">
+          Yükle
+        </button>
+        <button id="pwa-dismiss-btn" style="background: transparent; border: none; color: white; padding: 8px; cursor: pointer; opacity: 0.7;">
+          ✕
+        </button>
+      </div>
+    </div>
+    
+    <!-- Main App -->
+    <div id="root"></div>
+    
+    <!-- Service Worker Registration -->
+    <script>
+      // Remove loading screen when app loads
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          const loading = document.getElementById('app-loading');
+          if (loading) {
+            loading.style.opacity = '0';
+            loading.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => loading.remove(), 500);
+          }
+        }, 1000);
+      });
+      
+      // PWA Install Prompt
+      let deferredPrompt;
+      
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        
+        const installPrompt = document.getElementById('pwa-install-prompt');
+        const installBtn = document.getElementById('pwa-install-btn');
+        const dismissBtn = document.getElementById('pwa-dismiss-btn');
+        
+        // Show install prompt after 3 seconds
+        setTimeout(() => {
+          installPrompt.classList.add('show');
+        }, 3000);
+        
+        installBtn.addEventListener('click', () => {
+          installPrompt.classList.remove('show');
+          deferredPrompt.prompt();
+          
+          deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+              console.log('✅ PWA installation accepted');
+            } else {
+              console.log('❌ PWA installation dismissed');
+            }
+            deferredPrompt = null;
+          });
+        });
+        
+        dismissBtn.addEventListener('click', () => {
+          installPrompt.classList.remove('show');
+          // Don't show again for 24 hours
+          localStorage.setItem('pwa-install-dismissed', Date.now().toString());
+        });
+        
+        // Check if dismissed recently
+        const dismissed = localStorage.getItem('pwa-install-dismissed');
+        if (dismissed && (Date.now() - parseInt(dismissed)) < 24 * 60 * 60 * 1000) {
+          installPrompt.style.display = 'none';
+        }
+      });
+      
+      // Register Service Worker
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+              console.log('✅ Service Worker registered:', registration.scope);
+              
+              // Check for updates
+              registration.addEventListener('updatefound', () => {
+                const newWorker = registration.installing;
+                newWorker.addEventListener('statechange', () => {
+                  if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                    // Show update available notification
+                    console.log('🔄 App update available');
+                  }
+                });
+              });
+            })
+            .catch((error) => {
+              console.error('❌ Service Worker registration failed:', error);
+            });
+        });
+      }
+      
+      // App Install Success
+      window.addEventListener('appinstalled', () => {
+        console.log('✅ PWA successfully installed');
+        // Hide install prompt
+        const installPrompt = document.getElementById('pwa-install-prompt');
+        if (installPrompt) {
+          installPrompt.style.display = 'none';
+        }
+      });
+      
+      // Performance monitoring
+      window.addEventListener('load', () => {
+        // Measure loading performance
+        if (window.performance) {
+          const navigation = performance.getEntriesByType('navigation')[0];
+          console.log('📊 Page Load Time:', navigation.loadEventEnd - navigation.loadEventStart, 'ms');
+        }
+      });
+    </script>
+    
+    <!-- Main App Module -->
+    <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Fallback for older browsers -->
+    <noscript>
+      <div style="text-align: center; padding: 50px; font-family: Arial, sans-serif;">
+        <h2>🧠 YKS Akıllı Asistanı</h2>
+        <p>Bu uygulama JavaScript gerektirir. Lütfen tarayıcınızda JavaScript'i etkinleştirin.</p>
+        <p>This app requires JavaScript. Please enable JavaScript in your browser.</p>
+      </div>
+    </noscript>
+  </body>
+</html>
+
+

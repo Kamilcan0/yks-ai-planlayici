@@ -1,0 +1,535 @@
+/**
+ * YKS Akıllı Asistanı - Mobile Responsive Styles
+ * PWA ve mobil cihazlar için optimized CSS
+ */
+
+/* PWA Temel Ayarları */
+:root {
+  --pwa-primary: #7c3aed;
+  --pwa-primary-dark: #6d28d9;
+  --pwa-secondary: #f59e0b;
+  --pwa-background: #ffffff;
+  --pwa-surface: #f8fafc;
+  --pwa-border: #e2e8f0;
+  --pwa-text: #1e293b;
+  --pwa-text-light: #64748b;
+  --pwa-success: #10b981;
+  --pwa-warning: #f59e0b;
+  --pwa-error: #ef4444;
+  
+  /* PWA Safe Areas (iPhone X+) */
+  --safe-area-top: env(safe-area-inset-top, 0px);
+  --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-area-left: env(safe-area-inset-left, 0px);
+  --safe-area-right: env(safe-area-inset-right, 0px);
+}
+
+/* PWA Viewport Optimizasyonu */
+html {
+  /* iOS Safari için bounce efektini engelle */
+  overscroll-behavior: none;
+  /* Zoom'u engelle */
+  touch-action: manipulation;
+  /* Smooth scrolling */
+  scroll-behavior: smooth;
+}
+
+body {
+  /* iOS Safari için background scroll önleme */
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  /* User select'i engelle (mobile için) */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Tap highlight'ı kaldır */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Ana uygulama container */
+#root {
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* Safe area padding */
+  padding-top: var(--safe-area-top);
+  padding-bottom: var(--safe-area-bottom);
+  padding-left: var(--safe-area-left);
+  padding-right: var(--safe-area-right);
+}
+
+/* PWA Header Optimizasyonu */
+.pwa-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--pwa-background);
+  border-bottom: 1px solid var(--pwa-border);
+  /* iOS Safari için backdrop blur */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  /* Safe area support */
+  padding-top: max(var(--safe-area-top), 10px);
+}
+
+/* Mobile Navigation */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--pwa-background);
+  border-top: 1px solid var(--pwa-border);
+  padding: 8px 0;
+  padding-bottom: max(var(--safe-area-bottom), 8px);
+  z-index: 1000;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.mobile-nav-items {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.mobile-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  min-width: 60px;
+  text-decoration: none;
+  color: var(--pwa-text-light);
+}
+
+.mobile-nav-item.active {
+  background: rgba(124, 58, 237, 0.1);
+  color: var(--pwa-primary);
+}
+
+.mobile-nav-item:hover {
+  background: rgba(124, 58, 237, 0.05);
+}
+
+.mobile-nav-icon {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 4px;
+}
+
+.mobile-nav-label {
+  font-size: 11px;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Mobile Card Optimizasyonu */
+.mobile-card {
+  margin: 12px;
+  border-radius: 16px;
+  background: var(--pwa-surface);
+  border: 1px solid var(--pwa-border);
+  overflow: hidden;
+  /* Shadow optimizasyonu */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-card-header {
+  padding: 16px 20px 12px;
+  background: var(--pwa-background);
+  border-bottom: 1px solid var(--pwa-border);
+}
+
+.mobile-card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--pwa-text);
+  margin: 0;
+}
+
+.mobile-card-content {
+  padding: 16px 20px;
+}
+
+/* Touch-Friendly Buttons */
+.mobile-btn {
+  min-height: 44px; /* iOS HIG minimum */
+  min-width: 44px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  /* Touch feedback */
+  transform: translateZ(0);
+  -webkit-touch-callout: none;
+}
+
+.mobile-btn:active {
+  transform: scale(0.98);
+}
+
+.mobile-btn-primary {
+  background: var(--pwa-primary);
+  color: white;
+}
+
+.mobile-btn-primary:hover {
+  background: var(--pwa-primary-dark);
+}
+
+.mobile-btn-outline {
+  background: transparent;
+  color: var(--pwa-primary);
+  border: 2px solid var(--pwa-primary);
+}
+
+.mobile-btn-outline:hover {
+  background: var(--pwa-primary);
+  color: white;
+}
+
+/* Form Optimizasyonu */
+.mobile-form-group {
+  margin-bottom: 20px;
+}
+
+.mobile-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--pwa-text);
+  margin-bottom: 8px;
+}
+
+.mobile-input {
+  width: 100%;
+  min-height: 44px;
+  padding: 12px 16px;
+  border: 2px solid var(--pwa-border);
+  border-radius: 12px;
+  font-size: 16px; /* iOS zoom önleme */
+  background: var(--pwa-background);
+  transition: all 0.2s ease;
+}
+
+.mobile-input:focus {
+  outline: none;
+  border-color: var(--pwa-primary);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+}
+
+/* Progress Indicators */
+.mobile-progress {
+  width: 100%;
+  height: 8px;
+  background: var(--pwa-border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.mobile-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--pwa-primary), var(--pwa-secondary));
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+/* Loading States */
+.mobile-loading {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--pwa-text-light);
+}
+
+.mobile-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--pwa-border);
+  border-top: 2px solid var(--pwa-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Notification Toast */
+.mobile-toast {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  z-index: 2000;
+  background: var(--pwa-background);
+  border: 1px solid var(--pwa-border);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transform: translateY(-100px);
+  transition: transform 0.3s ease;
+}
+
+.mobile-toast.show {
+  transform: translateY(0);
+}
+
+.mobile-toast-success {
+  border-left: 4px solid var(--pwa-success);
+}
+
+.mobile-toast-warning {
+  border-left: 4px solid var(--pwa-warning);
+}
+
+.mobile-toast-error {
+  border-left: 4px solid var(--pwa-error);
+}
+
+/* Responsive Grid */
+.mobile-grid {
+  display: grid;
+  gap: 16px;
+  padding: 16px;
+}
+
+.mobile-grid-1 { grid-template-columns: 1fr; }
+.mobile-grid-2 { grid-template-columns: repeat(2, 1fr); }
+.mobile-grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+/* Stats Cards */
+.mobile-stat-card {
+  text-align: center;
+  padding: 20px;
+  background: var(--pwa-background);
+  border-radius: 16px;
+  border: 1px solid var(--pwa-border);
+}
+
+.mobile-stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--pwa-primary);
+  margin-bottom: 4px;
+}
+
+.mobile-stat-label {
+  font-size: 12px;
+  color: var(--pwa-text-light);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  /* Desktop navigation gizle */
+  .desktop-nav {
+    display: none !important;
+  }
+  
+  /* Mobile navigation göster */
+  .mobile-nav {
+    display: block;
+  }
+  
+  /* Ana içerik için bottom padding (nav için) */
+  .main-content {
+    padding-bottom: 80px;
+  }
+  
+  /* Grid responsive */
+  .mobile-grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* Typography scaling */
+  .mobile-card-title {
+    font-size: 16px;
+  }
+  
+  .mobile-stat-value {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Extra small screens */
+  .mobile-card {
+    margin: 8px;
+    border-radius: 12px;
+  }
+  
+  .mobile-card-content {
+    padding: 12px 16px;
+  }
+  
+  .mobile-grid {
+    gap: 12px;
+    padding: 12px;
+  }
+  
+  .mobile-grid-2,
+  .mobile-grid-3 {
+    grid-template-columns: 1fr;
+  }
+  
+  .mobile-nav-label {
+    display: none; /* Sadece iconlar */
+  }
+  
+  .mobile-nav-item {
+    min-width: 48px;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --pwa-background: #0f172a;
+    --pwa-surface: #1e293b;
+    --pwa-border: #334155;
+    --pwa-text: #f1f5f9;
+    --pwa-text-light: #94a3b8;
+  }
+}
+
+/* Landscape Orientation */
+@media (orientation: landscape) and (max-height: 500px) {
+  .mobile-nav {
+    padding: 4px 0;
+    padding-bottom: max(var(--safe-area-bottom), 4px);
+  }
+  
+  .mobile-nav-item {
+    padding: 4px 8px;
+  }
+  
+  .mobile-nav-icon {
+    width: 20px;
+    height: 20px;
+    margin-bottom: 2px;
+  }
+  
+  .mobile-nav-label {
+    font-size: 10px;
+  }
+}
+
+/* PWA Install Prompt */
+.pwa-install-prompt {
+  position: fixed;
+  bottom: 100px;
+  left: 20px;
+  right: 20px;
+  background: var(--pwa-primary);
+  color: white;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  z-index: 1500;
+  transform: translateY(100px);
+  transition: transform 0.3s ease;
+}
+
+.pwa-install-prompt.show {
+  transform: translateY(0);
+}
+
+.pwa-install-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pwa-install-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.pwa-install-text {
+  flex: 1;
+}
+
+.pwa-install-title {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.pwa-install-subtitle {
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+.pwa-install-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.pwa-install-btn {
+  flex: 1;
+  padding: 8px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pwa-install-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.pwa-install-btn.primary {
+  background: white;
+  color: var(--pwa-primary);
+  border-color: white;
+}
+
+.pwa-install-btn.primary:hover {
+  background: #f8fafc;
+}
+
+/* Accessibility Improvements */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  :root {
+    --pwa-border: #000000;
+    --pwa-primary: #0000ff;
+  }
+  
+  .mobile-btn {
+    border: 2px solid currentColor;
+  }
+}

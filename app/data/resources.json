@@ -1,0 +1,176 @@
+{
+  "Matematik": [
+    {
+      "type": "book",
+      "title": "TYT Matematik Soru Bankası",
+      "provider": "Karekök",
+      "tags": [
+        "sayisal",
+        "ea"
+      ]
+    },
+    {
+      "type": "video",
+      "title": "Hocalara Geldik - TYT Matematik",
+      "provider": "YouTube",
+      "url": "https://www.youtube.com/@hocalarageldik",
+      "tags": [
+        "sayisal",
+        "ea"
+      ]
+    },
+    {
+      "type": "web",
+      "title": "Khan Academy Türkçe - Matematik",
+      "provider": "Khan Academy",
+      "url": "https://tr.khanacademy.org",
+      "tags": [
+        "sayisal",
+        "ea"
+      ]
+    }
+  ],
+  "Geometri": [
+    {
+      "type": "book",
+      "title": "AYT Geometri Soru Bankası",
+      "provider": "Apotemi",
+      "tags": [
+        "sayisal",
+        "ea"
+      ]
+    },
+    {
+      "type": "video",
+      "title": "Tonguç Geometri",
+      "provider": "YouTube",
+      "url": "https://www.youtube.com/@tongucakademi",
+      "tags": [
+        "sayisal",
+        "ea"
+      ]
+    }
+  ],
+  "Fizik": [
+    {
+      "type": "book",
+      "title": "AYT Fizik Soru Bankası",
+      "provider": "Aydın",
+      "tags": [
+        "sayisal"
+      ]
+    },
+    {
+      "type": "video",
+      "title": "Parafizik",
+      "provider": "YouTube",
+      "url": "https://www.youtube.com/@parafizik",
+      "tags": [
+        "sayisal"
+      ]
+    }
+  ],
+  "Kimya": [
+    {
+      "type": "book",
+      "title": "AYT Kimya Soru Bankası",
+      "provider": "Endemik",
+      "tags": [
+        "sayisal"
+      ]
+    },
+    {
+      "type": "video",
+      "title": "Kimya Adası",
+      "provider": "YouTube",
+      "url": "https://www.youtube.com/@kimyaadasi",
+      "tags": [
+        "sayisal"
+      ]
+    }
+  ],
+  "Biyoloji": [
+    {
+      "type": "book",
+      "title": "AYT Biyoloji Soru Bankası",
+      "provider": "Bilgi Sarmal",
+      "tags": [
+        "sayisal"
+      ]
+    },
+    {
+      "type": "video",
+      "title": "BiyolojiGUN",
+      "provider": "YouTube",
+      "url": "https://www.youtube.com/@BiyolojiGUN",
+      "tags": [
+        "sayisal"
+      ]
+    }
+  ],
+  "Türkçe": [
+    {
+      "type": "book",
+      "title": "TYT Türkçe Paragraf",
+      "provider": "Paraf",
+      "tags": [
+        "sayisal",
+        "ea",
+        "sozel",
+        "dil"
+      ]
+    },
+    {
+      "type": "video",
+      "title": "Paragrafiks",
+      "provider": "YouTube",
+      "url": "https://www.youtube.com/@paragrafiks",
+      "tags": [
+        "sayisal",
+        "ea",
+        "sozel",
+        "dil"
+      ]
+    }
+  ],
+  "Sosyal": [
+    {
+      "type": "book",
+      "title": "TYT Sosyal Bilimler Soru Bankası",
+      "provider": "Bilgi Sarmal",
+      "tags": [
+        "ea",
+        "sozel"
+      ]
+    },
+    {
+      "type": "video",
+      "title": "Hocalara Geldik - TYT Sosyal",
+      "provider": "YouTube",
+      "url": "https://www.youtube.com/@hocalarageldik",
+      "tags": [
+        "ea",
+        "sozel"
+      ]
+    }
+  ],
+  "Yabancı Dil": [
+    {
+      "type": "book",
+      "title": "YDT Vocabulary",
+      "provider": "Modadil",
+      "tags": [
+        "dil"
+      ]
+    },
+    {
+      "type": "web",
+      "title": "Cambridge English Practice",
+      "provider": "Cambridge",
+      "url": "https://www.cambridgeenglish.org",
+      "tags": [
+        "dil"
+      ]
+    }
+  ]
+}

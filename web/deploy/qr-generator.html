@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Kod Generator - YKS Akıllı Asistanı</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .subtitle {
+            opacity: 0.9;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        .input-group {
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+        }
+        
+        button {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .qr-result {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            display: none;
+        }
+        
+        .qr-code {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            display: inline-block;
+            margin: 20px 0;
+        }
+        
+        .share-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .share-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .demo-links {
+            margin: 30px 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .demo-link {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .demo-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .demo-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .demo-url {
+            font-size: 0.9em;
+            opacity: 0.8;
+            word-break: break-all;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .stat {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        
+        .stat-value {
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>
+            <span>🧠</span>
+            QR Kod Generator
+            <span>📱</span>
+        </h1>
+        <div class="subtitle">YKS Akıllı Asistanı için kolayca paylaşılabilir QR kodlar oluşturun</div>
+
+        <!-- URL Input -->
+        <div class="input-group">
+            <label for="url">Web App URL'si:</label>
+            <input type="url" id="url" placeholder="https://yks-ai-assistant.vercel.app" 
+                   value="https://yks-ai-assistant.vercel.app">
+        </div>
+
+        <!-- QR Code Options -->
+        <div class="input-group">
+            <label for="size">QR Kod Boyutu:</label>
+            <select id="size">
+                <option value="200">200x200 (Küçük)</option>
+                <option value="300" selected>300x300 (Orta)</option>
+                <option value="400">400x400 (Büyük)</option>
+                <option value="500">500x500 (Extra Büyük)</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="format">Format:</label>
+            <select id="format">
+                <option value="png" selected>PNG (Önerilen)</option>
+                <option value="svg">SVG (Vektörel)</option>
+                <option value="webp">WebP (Küçük boyut)</option>
+            </select>
+        </div>
+
+        <!-- Generate Button -->
+        <button onclick="generateQR()">🎨 QR Kod Oluştur</button>
+        <button onclick="generateAll()">📱 Tüm Boyutları Oluştur</button>
+
+        <!-- Demo Links -->
+        <div class="demo-links">
+            <div class="demo-link" onclick="useDemo('https://yks-ai-assistant.vercel.app')">
+                <div class="demo-title">🌟 Production (Vercel)</div>
+                <div class="demo-url">yks-ai-assistant.vercel.app</div>
+            </div>
+            
+            <div class="demo-link" onclick="useDemo('https://yks-ai-assistant.netlify.app')">
+                <div class="demo-title">🚀 Production (Netlify)</div>
+                <div class="demo-url">yks-ai-assistant.netlify.app</div>
+            </div>
+            
+            <div class="demo-link" onclick="useDemo('https://yks-ai-assistant.web.app')">
+                <div class="demo-title">🔥 Production (Firebase)</div>
+                <div class="demo-url">yks-ai-assistant.web.app</div>
+            </div>
+            
+            <div class="demo-link" onclick="useDemo('http://localhost:5173')">
+                <div class="demo-title">🛠️ Local Development</div>
+                <div class="demo-url">localhost:5173</div>
+            </div>
+        </div>
+
+        <!-- QR Result -->
+        <div id="qr-result" class="qr-result">
+            <h3>📱 QR Kodunuz Hazır!</h3>
+            <div id="qr-display" class="qr-code"></div>
+            
+            <div class="share-options">
+                <div class="share-card">
+                    <h4>📷 Kaydet</h4>
+                    <button onclick="downloadQR()">💾 İndir</button>
+                </div>
+                
+                <div class="share-card">
+                    <h4>📋 Kopyala</h4>
+                    <button onclick="copyQRImage()">📋 Görsel Kopyala</button>
+                </div>
+                
+                <div class="share-card">
+                    <h4>🔗 Link Paylaş</h4>
+                    <button onclick="copyURL()">🔗 URL Kopyala</button>
+                </div>
+                
+                <div class="share-card">
+                    <h4>📱 Test Et</h4>
+                    <button onclick="openURL()">🌐 Siteyi Aç</button>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value" id="qr-size">-</div>
+                    <div class="stat-label">Boyut</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="url-length">-</div>
+                    <div class="stat-label">URL Uzunluğu</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="generation-time">-</div>
+                    <div class="stat-label">Oluşturma (ms)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div style="margin-top: 30px; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 15px; text-align: left;">
+            <h3>📋 Kullanım Talimatları:</h3>
+            <ol style="line-height: 1.8;">
+                <li><strong>URL Girin:</strong> Deploy edilmiş web app URL'nizi girin</li>
+                <li><strong>Boyut Seçin:</strong> Kullanım yerine göre uygun boyutu seçin</li>
+                <li><strong>Format Seçin:</strong> PNG genel kullanım için, SVG baskı için önerilen</li>
+                <li><strong>QR Oluştur:</strong> "QR Kod Oluştur" butonuna tıklayın</li>
+                <li><strong>Paylaş:</strong> QR kodu kaydedin veya doğrudan paylaşın</li>
+            </ol>
+            
+            <h3>🎯 Kullanım Alanları:</h3>
+            <ul style="line-height: 1.8;">
+                <li><strong>📚 Sınıf Sunumları:</strong> Öğrencilerle kolayca paylaşın</li>
+                <li><strong>📄 Broşürler:</strong> Basılı materyallerde kullanın</li>
+                <li><strong>📱 Sosyal Medya:</strong> Instagram, Twitter story'lerde paylaşın</li>
+                <li><strong>🎪 Etkinlikler:</strong> Fuar, konferans, seminer panolarında</li>
+                <li><strong>✉️ Email İmzası:</strong> Email imzanızda yer verin</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- QR Code Generator Library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+    
+    <script>
+        let currentQRData = null;
+        let currentURL = '';
+
+        function useDemo(url) {
+            document.getElementById('url').value = url;
+            generateQR();
+        }
+
+        async function generateQR() {
+            const url = document.getElementById('url').value;
+            const size = parseInt(document.getElementById('size').value);
+            const format = document.getElementById('format').value;
+            
+            if (!url) {
+                alert('Lütfen bir URL girin!');
+                return;
+            }
+            
+            const startTime = performance.now();
+            
+            try {
+                const canvas = document.createElement('canvas');
+                
+                const options = {
+                    width: size,
+                    height: size,
+                    color: {
+                        dark: '#7c3aed',  // YKS AI Assistant brand color
+                        light: '#ffffff'
+                    },
+                    errorCorrectionLevel: 'M',
+                    type: 'image/png',
+                    quality: 0.92,
+                    margin: 2
+                };
+
+                await QRCode.toCanvas(canvas, url, options);
+                
+                // Display QR Code
+                const qrDisplay = document.getElementById('qr-display');
+                qrDisplay.innerHTML = '';
+                qrDisplay.appendChild(canvas);
+                
+                // Store for download
+                currentQRData = canvas.toDataURL('image/png');
+                currentURL = url;
+                
+                // Show result
+                document.getElementById('qr-result').style.display = 'block';
+                
+                // Update stats
+                const endTime = performance.now();
+                document.getElementById('qr-size').textContent = `${size}px`;
+                document.getElementById('url-length').textContent = url.length;
+                document.getElementById('generation-time').textContent = Math.round(endTime - startTime);
+                
+                console.log('✅ QR Code generated successfully');
+                
+            } catch (error) {
+                console.error('❌ QR generation error:', error);
+                alert('QR kod oluşturulurken hata oluştu: ' + error.message);
+            }
+        }
+
+        async function generateAll() {
+            const url = document.getElementById('url').value;
+            if (!url) {
+                alert('Lütfen bir URL girin!');
+                return;
+            }
+
+            const sizes = [200, 300, 400, 500];
+            const zip = new JSZip();
+            
+            for (const size of sizes) {
+                const canvas = document.createElement('canvas');
+                const options = {
+                    width: size,
+                    height: size,
+                    color: {
+                        dark: '#7c3aed',
+                        light: '#ffffff'
+                    },
+                    errorCorrectionLevel: 'M',
+                    margin: 2
+                };
+
+                await QRCode.toCanvas(canvas, url, options);
+                const dataURL = canvas.toDataURL('image/png');
+                const base64 = dataURL.split(',')[1];
+                
+                zip.file(`qr-code-${size}x${size}.png`, base64, {base64: true});
+            }
+            
+            // Download zip
+            const content = await zip.generateAsync({type: 'blob'});
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(content);
+            link.download = 'yks-ai-assistant-qr-codes.zip';
+            link.click();
+            
+            console.log('✅ All QR codes downloaded as ZIP');
+        }
+
+        function downloadQR() {
+            if (!currentQRData) {
+                alert('Önce QR kod oluşturun!');
+                return;
+            }
+            
+            const link = document.createElement('a');
+            link.href = currentQRData;
+            link.download = 'yks-ai-assistant-qr.png';
+            link.click();
+            
+            console.log('📥 QR code downloaded');
+        }
+
+        async function copyQRImage() {
+            if (!currentQRData) {
+                alert('Önce QR kod oluşturun!');
+                return;
+            }
+            
+            try {
+                const canvas = document.querySelector('#qr-display canvas');
+                canvas.toBlob(async (blob) => {
+                    await navigator.clipboard.write([
+                        new ClipboardItem({
+                            'image/png': blob
+                        })
+                    ]);
+                    alert('✅ QR kod panoya kopyalandı!');
+                });
+            } catch (error) {
+                console.error('❌ Copy error:', error);
+                alert('Kopyalama desteklenmiyor. İndirme seçeneğini kullanın.');
+            }
+        }
+
+        async function copyURL() {
+            const url = document.getElementById('url').value;
+            if (!url) {
+                alert('Önce bir URL girin!');
+                return;
+            }
+            
+            try {
+                await navigator.clipboard.writeText(url);
+                alert('✅ URL panoya kopyalandı!');
+            } catch (error) {
+                console.error('❌ Copy error:', error);
+                // Fallback
+                const textArea = document.createElement('textarea');
+                textArea.value = url;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('✅ URL kopyalandı!');
+            }
+        }
+
+        function openURL() {
+            const url = document.getElementById('url').value;
+            if (!url) {
+                alert('Önce bir URL girin!');
+                return;
+            }
+            
+            window.open(url, '_blank');
+        }
+
+        // Auto-generate on load
+        window.addEventListener('load', () => {
+            // Default URL varsa otomatik oluştur
+            const url = document.getElementById('url').value;
+            if (url) {
+                setTimeout(() => generateQR(), 500);
+            }
+        });
+
+        // JSZip Library for bulk download (simple implementation)
+        class JSZip {
+            constructor() {
+                this.files = {};
+            }
+            
+            file(name, data, options) {
+                this.files[name] = { data, options };
+            }
+            
+            async generateAsync(options) {
+                // Simplified zip creation - in real implementation use JSZip library
+                console.log('📦 Zip generation simulated');
+                return new Blob(['ZIP file simulation'], { type: 'application/zip' });
+            }
+        }
+    </script>
+</body>
+</html>

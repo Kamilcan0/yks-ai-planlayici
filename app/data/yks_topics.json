@@ -1,0 +1,64 @@
+{
+  "Türkçe": [
+    "Sözcükte Anlam",
+    "Cümlede Anlam",
+    "Paragraf",
+    "Dil Bilgisi",
+    "Yazım-Noktalama"
+  ],
+  "Sosyal": [
+    "Tarih Temel",
+    "Coğrafya Temel",
+    "Felsefe",
+    "Din Kültürü"
+  ],
+  "Matematik": [
+    "Temel Kavramlar",
+    "Sayılar",
+    "Bölünebilme",
+    "OBEB-OKEK",
+    "Rasyonel Sayılar",
+    "Denklemler",
+    "Mutlak Değer",
+    "Üslü Sayılar",
+    "Köklü Sayılar",
+    "Oran-Orantı",
+    "Problemler"
+  ],
+  "Geometri": [
+    "Açı-Kenar",
+    "Üçgenler",
+    "Dörtgenler",
+    "Çokgenler",
+    "Çember-Daire",
+    "Katı Cisimler"
+  ],
+  "Fizik": [
+    "Fizik Bilimine Giriş",
+    "Madde ve Özellikleri",
+    "Hareket ve Kuvvet",
+    "Enerji",
+    "Elektrik ve Manyetizma"
+  ],
+  "Kimya": [
+    "Atom ve Periyodik Sistem",
+    "Kimyasal Türler Arası Etkileşimler",
+    "Kimyasal Hesaplamalar",
+    "Asit-Baz-Tuz",
+    "Karışımlar"
+  ],
+  "Biyoloji": [
+    "Canlıların Yapısı",
+    "Hücre",
+    "Canlıların Sınıflandırılması",
+    "İnsan Fizyolojisi",
+    "Ekosistem"
+  ],
+  "Yabancı Dil": [
+    "Vocabulary",
+    "Grammar",
+    "Reading",
+    "Use of English",
+    "Listening"
+  ]
+}

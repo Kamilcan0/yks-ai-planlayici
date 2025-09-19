@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Çevrimdışı - YKS Akıllı Asistanı</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .feature h3 {
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+
+        .feature p {
+            font-size: 0.9em;
+            margin: 0;
+            opacity: 0.8;
+        }
+
+        .retry-btn {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            color: white;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .retry-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .status {
+            margin-top: 30px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            font-size: 0.9em;
+        }
+
+        .online {
+            background: rgba(76, 175, 80, 0.3);
+            border: 1px solid rgba(76, 175, 80, 0.5);
+        }
+
+        .offline {
+            background: rgba(244, 67, 54, 0.3);
+            border: 1px solid rgba(244, 67, 54, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+                margin: 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .icon {
+                font-size: 60px;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">🧠</div>
+        <h1>YKS Akıllı Asistanı</h1>
+        <p>İnternet bağlantınız yok, ancak bazı özellikler çevrimdışı olarak kullanılabilir!</p>
+        
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">📚</div>
+                <h3>Kayıtlı Planlar</h3>
+                <p>Daha önce oluşturulan çalışma planlarınızı görüntüleyebilirsiniz</p>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">📊</div>
+                <h3>İstatistikler</h3>
+                <p>Yerel verilerdeki performans istatistiklerinize erişebilirsiniz</p>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">⏱️</div>
+                <h3>Zamanlayıcı</h3>
+                <p>Pomodoro tekniği ile çalışma oturumlarınızı takip edebilirsiniz</p>
+            </div>
+        </div>
+        
+        <button class="retry-btn" onclick="checkConnection()">🔄 Bağlantıyı Kontrol Et</button>
+        
+        <div class="status" id="connectionStatus">
+            🔍 Bağlantı durumu kontrol ediliyor...
+        </div>
+    </div>
+
+    <script>
+        // Bağlantı durumu kontrolü
+        function updateConnectionStatus() {
+            const statusEl = document.getElementById('connectionStatus');
+            
+            if (navigator.onLine) {
+                statusEl.textContent = '✅ İnternet bağlantısı mevcut! Sayfayı yenileyebilirsiniz.';
+                statusEl.className = 'status online';
+            } else {
+                statusEl.textContent = '❌ İnternet bağlantısı yok. Çevrimdışı modda çalışıyorsunuz.';
+                statusEl.className = 'status offline';
+            }
+        }
+
+        function checkConnection() {
+            updateConnectionStatus();
+            
+            if (navigator.onLine) {
+                // Bağlantı varsa ana sayfaya yönlendir
+                setTimeout(() => {
+                    window.location.href = '/';
+                }, 1000);
+            } else {
+                // Service Worker ile ana sayfayı cache'ten yüklemeyi dene
+                if ('serviceWorker' in navigator) {
+                    navigator.serviceWorker.ready.then(registration => {
+                        registration.sync.register('offline-page-reload');
+                    });
+                }
+            }
+        }
+
+        // Sayfa yüklendiğinde durumu kontrol et
+        window.addEventListener('load', updateConnectionStatus);
+        
+        // Bağlantı durumu değişimlerini dinle
+        window.addEventListener('online', updateConnectionStatus);
+        window.addEventListener('offline', updateConnectionStatus);
+
+        // PWA yükleme kontrolü
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Yükleme butonu göster
+            const installBtn = document.createElement('button');
+            installBtn.textContent = '📱 Uygulamayı Yükle';
+            installBtn.className = 'retry-btn';
+            installBtn.style.marginLeft = '10px';
+            installBtn.onclick = () => {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('✅ PWA yükleme kabul edildi');
+                    }
+                    deferredPrompt = null;
+                });
+            };
+            
+            document.querySelector('.container').appendChild(installBtn);
+        });
+
+        // Service Worker mesajlaşma
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.addEventListener('message', (event) => {
+                if (event.data && event.data.type === 'CACHE_UPDATED') {
+                    const statusEl = document.getElementById('connectionStatus');
+                    statusEl.textContent = '🔄 Uygulama güncellendi! Sayfayı yenileyin.';
+                    statusEl.className = 'status online';
+                }
+            });
+        }
+
+        // Klavye kısayolları
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'r' && (e.ctrlKey || e.metaKey)) {
+                e.preventDefault();
+                checkConnection();
+            }
+        });
+
+        console.log('🔄 YKS AI Assistant Offline sayfası yüklendi');
+    </script>
+</body>
+</html>

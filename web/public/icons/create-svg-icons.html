@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YKS AI Assistant - Icon Generator</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 20px; 
+            background: #f5f5f5;
+        }
+        .icon-container { 
+            display: inline-block; 
+            margin: 10px; 
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        canvas { 
+            border: 1px solid #ddd; 
+            border-radius: 10px;
+        }
+        button {
+            background: #7c3aed;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #6d28d9;
+        }
+        .title {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="title">
+        <h1>🧠 YKS Akıllı Asistanı - PWA İkon Üretici</h1>
+        <p>Tüm PWA ikonları otomatik olarak oluşturulacak</p>
+    </div>
+
+    <div id="icons-container"></div>
+    
+    <div style="text-align: center; margin-top: 30px;">
+        <button onclick="generateAllIcons()">🎨 Tüm İkonları Oluştur</button>
+        <button onclick="downloadAllIcons()">💾 Tümünü İndir</button>
+    </div>
+
+    <script>
+        const iconSizes = [72, 96, 128, 144, 152, 180, 192, 384, 512];
+        const icons = [];
+
+        function createIcon(size) {
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+
+            // Gradyan arka plan
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#7c3aed'); // Mor
+            gradient.addColorStop(1, '#4c1d95'); // Koyu mor
+            
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, size, size);
+
+            // Yuvarlak köşeler (PWA standartları için)
+            ctx.globalCompositeOperation = 'destination-in';
+            ctx.beginPath();
+            const radius = size * 0.1; // %10 radius
+            ctx.roundRect(0, 0, size, size, radius);
+            ctx.fill();
+            ctx.globalCompositeOperation = 'source-over';
+
+            // Beyin emoji / AI simgesi
+            ctx.fillStyle = 'white';
+            ctx.font = `${size * 0.5}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            
+            // Unicode beyin emoji
+            const emoji = '🧠';
+            try {
+                ctx.fillText(emoji, size / 2, size / 2);
+            } catch (e) {
+                // Fallback: AI text
+                ctx.font = `bold ${size * 0.25}px Arial`;
+                ctx.fillText('AI', size / 2, size / 2);
+            }
+
+            // Şık çerçeve
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+            ctx.lineWidth = size * 0.02;
+            ctx.beginPath();
+            ctx.roundRect(size * 0.05, size * 0.05, size * 0.9, size * 0.9, radius);
+            ctx.stroke();
+
+            return canvas;
+        }
+
+        function displayIcon(canvas, size) {
+            const container = document.createElement('div');
+            container.className = 'icon-container';
+            
+            const title = document.createElement('h3');
+            title.textContent = `${size}x${size}`;
+            
+            const downloadBtn = document.createElement('button');
+            downloadBtn.textContent = '💾 İndir';
+            downloadBtn.onclick = () => downloadIcon(canvas, size);
+            
+            container.appendChild(title);
+            container.appendChild(canvas);
+            container.appendChild(document.createElement('br'));
+            container.appendChild(downloadBtn);
+            
+            return container;
+        }
+
+        function downloadIcon(canvas, size) {
+            const link = document.createElement('a');
+            link.download = `icon-${size}x${size}.png`;
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+
+        function generateAllIcons() {
+            const container = document.getElementById('icons-container');
+            container.innerHTML = '';
+            icons.length = 0;
+
+            iconSizes.forEach(size => {
+                const canvas = createIcon(size);
+                const iconContainer = displayIcon(canvas, size);
+                container.appendChild(iconContainer);
+                icons.push({ canvas, size });
+            });
+
+            // Özel ikonlar
+            createSpecialIcons();
+        }
+
+        function createSpecialIcons() {
+            const container = document.getElementById('icons-container');
+            
+            // Apple Touch Icon (180x180)
+            if (!iconSizes.includes(180)) {
+                const canvas = createIcon(180);
+                const iconContainer = displayIcon(canvas, 180);
+                container.appendChild(iconContainer);
+                icons.push({ canvas, size: 180, name: 'apple-touch-icon' });
+            }
+
+            // Badge Icon (72x72)
+            const badgeCanvas = createBadgeIcon();
+            const badgeContainer = displayIcon(badgeCanvas, 72);
+            badgeContainer.querySelector('h3').textContent = 'Badge 72x72';
+            container.appendChild(badgeContainer);
+            icons.push({ canvas: badgeCanvas, size: 72, name: 'badge-72x72' });
+
+            // Favicon (32x32)
+            const faviconCanvas = createIcon(32);
+            const faviconContainer = displayIcon(faviconCanvas, 32);
+            faviconContainer.querySelector('h3').textContent = 'Favicon 32x32';
+            container.appendChild(faviconContainer);
+            icons.push({ canvas: faviconCanvas, size: 32, name: 'favicon' });
+        }
+
+        function createBadgeIcon() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 72;
+            canvas.height = 72;
+            const ctx = canvas.getContext('2d');
+
+            // Basit mor daire
+            ctx.fillStyle = '#7c3aed';
+            ctx.beginPath();
+            ctx.arc(36, 36, 32, 0, 2 * Math.PI);
+            ctx.fill();
+
+            // Beyaz AI text
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 20px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('AI', 36, 36);
+
+            return canvas;
+        }
+
+        function downloadAllIcons() {
+            if (icons.length === 0) {
+                alert('Önce ikonları oluşturun!');
+                return;
+            }
+
+            icons.forEach(({ canvas, size, name }) => {
+                const link = document.createElement('a');
+                if (name) {
+                    link.download = `${name}.png`;
+                } else {
+                    link.download = `icon-${size}x${size}.png`;
+                }
+                link.href = canvas.toDataURL();
+                link.click();
+                
+                // Küçük gecikme (tarayıcı sınırlaması için)
+                setTimeout(() => {}, 100);
+            });
+
+            alert(`✅ ${icons.length} ikon indirildi!\n\nDosyaları /public/icons/ klasörüne yerleştirin.`);
+        }
+
+        // Sayfa yüklendiğinde otomatik oluştur
+        window.onload = () => {
+            generateAllIcons();
+        };
+
+        // Canvas roundRect polyfill (eski tarayıcılar için)
+        if (!CanvasRenderingContext2D.prototype.roundRect) {
+            CanvasRenderingContext2D.prototype.roundRect = function(x, y, width, height, radius) {
+                this.beginPath();
+                this.moveTo(x + radius, y);
+                this.lineTo(x + width - radius, y);
+                this.quadraticCurveTo(x + width, y, x + width, y + radius);
+                this.lineTo(x + width, y + height - radius);
+                this.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+                this.lineTo(x + radius, y + height);
+                this.quadraticCurveTo(x, y + height, x, y + height - radius);
+                this.lineTo(x, y + radius);
+                this.quadraticCurveTo(x, y, x + radius, y);
+                this.closePath();
+            };
+        }
+    </script>
+</body>
+</html>
