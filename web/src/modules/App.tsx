@@ -12,69 +12,36 @@ import { AIAssistantDemo } from '@/components/AIAssistantDemo'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { ContactForm } from '@/components/ContactForm'
-import { OnboardingFlow } from '@/components/OnboardingFlow'
-import { AIAssistant } from '@/components/AIAssistant'
-import { aiPlanGenerator, type UserProfile, type WeeklyPlan } from '@/lib/ai/aiPlanGenerator'
+import { OnboardingModal } from '@/components/OnboardingModal'
+import { PlanGenerator } from '@/components/PlanGenerator'
+import { AuthProvider, useAuth } from '@/components/auth/AuthProvider'
+import { StudyPlan } from '@/lib/api'
 import { exportElementToPdf, exportWeekToExcel } from './export'
 
-export const App = () => {
+const AppContent = () => {
+  const { user, profile } = useAuth()
   const { 
-    name, field, level, isDarkMode, sessions, subjects, stats,
-    setUserInfo, toggleDarkMode, generateWeeklyPlan
+    isDarkMode, sessions, subjects, stats,
+    toggleDarkMode, generateWeeklyPlan
   } = usePlanStore()
   
   const [activeSection, setActiveSection] = useState<'home' | 'about' | 'contact'>('home')
   const [activeTab, setActiveTab] = useState<'dashboard' | 'ai' | 'plan' | 'subjects' | 'demo'>('dashboard')
-  const [showOnboarding, setShowOnboarding] = useState(!name)
-  const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
-  const [currentPlan, setCurrentPlan] = useState<WeeklyPlan | null>(null)
+  const [showOnboarding, setShowOnboarding] = useState(false)
+  const [currentPlan, setCurrentPlan] = useState<StudyPlan | null>(null)
 
-  // Generate user profile when basic info is available
+  // Show onboarding if user exists but no profile
   useEffect(() => {
-    if (name && field && level) {
-      const profile: UserProfile = {
-        kullanıcı_ID: `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-        name,
-        field: field as 'sayisal' | 'ea' | 'sozel' | 'dil',
-        level: level <= 2 ? 'başlangıç' : level <= 3 ? 'orta' : 'ileri',
-        weeklyHours: 20, // Default, will be updated by onboarding
-        targetDate: ''
-      }
-      setUserProfile(profile)
+    if (user && !profile) {
+      setShowOnboarding(true)
+    } else {
+      setShowOnboarding(false)
     }
-  }, [name, field, level])
+  }, [user, profile])
 
-  const handleOnboardingComplete = (data: any) => {
-    // Update store with onboarding data
-    setUserInfo(data.name, data.field, data.level === 'başlangıç' ? 1 : data.level === 'orta' ? 3 : 5)
-    
-    // Create full user profile
-    const profile: UserProfile = {
-      kullanıcı_ID: `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-      name: data.name,
-      field: data.field,
-      level: data.level,
-      weeklyHours: data.weeklyHours,
-      targetDate: data.targetDate
-    }
-    
-    setUserProfile(profile)
+  const handleOnboardingComplete = (profileData: any) => {
     setShowOnboarding(false)
-    
-    // Auto-generate first AI plan
-    setTimeout(() => {
-      generateAIPlan(profile)
-    }, 1000)
-  }
-
-  const generateAIPlan = async (profile: UserProfile) => {
-    try {
-      const plan = aiPlanGenerator.generateWeeklyPlan(profile)
-      setCurrentPlan(plan)
-      await aiPlanGenerator.savePlanToDatabase(plan)
-    } catch (error) {
-      console.error('Error generating AI plan:', error)
-    }
+    // Profile is handled by AuthProvider
   }
 
   const exportPlan = (format: 'pdf' | 'excel' | 'png') => {
@@ -113,12 +80,13 @@ export const App = () => {
     }
   }
 
-  // Show onboarding if no user data
-  if (showOnboarding || !userProfile) {
+  // Show onboarding modal
+  if (showOnboarding) {
     return (
-      <ThemeProvider>
-        <OnboardingFlow onComplete={handleOnboardingComplete} />
-      </ThemeProvider>
+      <OnboardingModal
+        isOpen={showOnboarding}
+        onComplete={handleOnboardingComplete}
+      />
     )
   }
 
@@ -222,7 +190,7 @@ export const App = () => {
           transition={{ duration: 0.3 }}
         >
           {activeTab === 'dashboard' && <Dashboard />}
-          {activeTab === 'ai' && <AIAssistant user={userProfile} onPlanGenerated={setCurrentPlan} />}
+          {activeTab === 'ai' && <PlanGenerator onPlanGenerated={setCurrentPlan} />}
           {activeTab === 'plan' && (
             <div className="space-y-6">
               <div className="flex items-center justify-between">
@@ -356,7 +324,6 @@ export const App = () => {
         <Header 
           isDarkMode={isDarkMode} 
           toggleDarkMode={toggleDarkMode}
-          userName={name}
         />
 
         <main className="flex-1 container mx-auto px-4 py-8">
@@ -368,5 +335,13 @@ export const App = () => {
         <Footer />
       </div>
     </ThemeProvider>
+  )
+}
+
+export const App = () => {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   )
 }

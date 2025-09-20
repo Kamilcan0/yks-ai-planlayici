@@ -1,0 +1,262 @@
+{
+  "kullanıcı_ID": "user_demo_12345",
+  "tarih": "2024-01-15",
+  "haftalık_plan": [
+    {
+      "gün": "Pazartesi",
+      "TYT": [
+        {
+          "konu": "Matematik",
+          "soru_sayısı": 25,
+          "süre_dakika": 90,
+          "odak_konular": ["Fonksiyonlar", "Denklem sistemleri"],
+          "confidence": 0.85,
+          "not": "Temel kavramları pekiştir"
+        },
+        {
+          "konu": "Türkçe",
+          "soru_sayısı": 20,
+          "süre_dakika": 60,
+          "odak_konular": ["Anlam bilgisi", "Sözcük türleri"],
+          "confidence": 0.78,
+          "not": "Kelime anlamlarına odaklan"
+        }
+      ],
+      "AYT": [
+        {
+          "konu": "Matematik",
+          "soru_sayısı": 15,
+          "süre_dakika": 75,
+          "odak_konular": ["Türev", "İntegral"],
+          "confidence": 0.72,
+          "not": "Formülleri ezberle"
+        }
+      ]
+    },
+    {
+      "gün": "Salı",
+      "TYT": [
+        {
+          "konu": "Fizik",
+          "soru_sayısı": 18,
+          "süre_dakika": 80,
+          "odak_konular": ["Kuvvet ve hareket", "Enerji"],
+          "confidence": 0.69,
+          "not": "Formül kartları hazırla"
+        },
+        {
+          "konu": "Kimya",
+          "soru_sayısı": 16,
+          "süre_dakika": 70,
+          "odak_konular": ["Atom yapısı", "Periyodik sistem"],
+          "confidence": 0.75,
+          "not": "Periyodik tabloyu ezberle"
+        }
+      ],
+      "AYT": [
+        {
+          "konu": "Fizik",
+          "soru_sayısı": 12,
+          "süre_dakika": 60,
+          "odak_konular": ["Elektrik ve manyetizma"],
+          "confidence": 0.65,
+          "not": "Temel kavramları tekrar et"
+        }
+      ]
+    },
+    {
+      "gün": "Çarşamba",
+      "TYT": [
+        {
+          "konu": "Biyoloji",
+          "soru_sayısı": 20,
+          "süre_dakika": 75,
+          "odak_konular": ["Hücre biyolojisi", "Genetik"],
+          "confidence": 0.80,
+          "not": "Şekilleri çiz ve ezberle"
+        },
+        {
+          "konu": "Matematik",
+          "soru_sayısı": 22,
+          "süre_dakika": 85,
+          "odak_konular": ["Geometri", "Trigonometri"],
+          "confidence": 0.82,
+          "not": "Formülleri düzenli tekrar et"
+        }
+      ],
+      "AYT": [
+        {
+          "konu": "Kimya",
+          "soru_sayısı": 14,
+          "süre_dakika": 70,
+          "odak_konular": ["Organik kimya", "Reaksiyonlar"],
+          "confidence": 0.68,
+          "not": "Reaksiyon mekanizmalarını öğren"
+        }
+      ]
+    },
+    {
+      "gün": "Perşembe",
+      "TYT": [
+        {
+          "konu": "Tarih",
+          "soru_sayısı": 18,
+          "süre_dakika": 65,
+          "odak_konular": ["Osmanlı Tarihi", "Cumhuriyet Dönemi"],
+          "confidence": 0.74,
+          "not": "Tarih kronolojisini oluştur"
+        },
+        {
+          "konu": "Coğrafya",
+          "soru_sayısı": 16,
+          "süre_dakika": 60,
+          "odak_konular": ["Fiziki coğrafya", "Beşeri coğrafya"],
+          "confidence": 0.71,
+          "not": "Harita çalışmaları yap"
+        }
+      ],
+      "AYT": [
+        {
+          "konu": "Biyoloji",
+          "soru_sayısı": 13,
+          "süre_dakika": 65,
+          "odak_konular": ["Ekoloji", "Biyolojik çeşitlilik"],
+          "confidence": 0.77,
+          "not": "Çevre problemlerini incele"
+        }
+      ]
+    },
+    {
+      "gün": "Cuma",
+      "TYT": [
+        {
+          "konu": "Matematik",
+          "soru_sayısı": 30,
+          "süre_dakika": 100,
+          "odak_konular": ["Karışık sorular", "Zaman yönetimi"],
+          "confidence": 0.83,
+          "not": "Deneme sınavı formatında çöz"
+        },
+        {
+          "konu": "Türkçe",
+          "soru_sayısı": 25,
+          "süre_dakika": 75,
+          "odak_konular": ["Parça çözümleme", "Dil bilgisi"],
+          "confidence": 0.79,
+          "not": "Hızlı okuma tekniklerini kullan"
+        }
+      ],
+      "AYT": []
+    },
+    {
+      "gün": "Cumartesi",
+      "TYT": [
+        {
+          "konu": "Genel Tekrar",
+          "soru_sayısı": 40,
+          "süre_dakika": 120,
+          "odak_konular": ["Zayıf konular", "Hata analizi"],
+          "confidence": 0.76,
+          "not": "Haftalık performansını değerlendir"
+        }
+      ],
+      "AYT": [
+        {
+          "konu": "Genel Tekrar",
+          "soru_sayısı": 25,
+          "süre_dakika": 90,
+          "odak_konular": ["Zor sorular", "Stratejik çözüm"],
+          "confidence": 0.70,
+          "not": "Zaman baskısı altında çalış"
+        }
+      ]
+    },
+    {
+      "gün": "Pazar",
+      "TYT": [],
+      "AYT": []
+    }
+  ],
+  "kaynak_önerileri": [
+    {
+      "konu": "Matematik",
+      "tip": "soru_bankası",
+      "isim": "TYT Matematik Soru Bankası - A Yayınları",
+      "zorluk": "orta",
+      "beklenen_süre_dakika": 120,
+      "öncelik": 5,
+      "link": "https://example.com/matematik-soru-bankasi",
+      "repeat_after_days": 3
+    },
+    {
+      "konu": "Türkçe",
+      "tip": "video",
+      "isim": "YKS Türkçe Konu Anlatım Videoları",
+      "zorluk": "kolay",
+      "beklenen_süre_dakika": 90,
+      "öncelik": 4,
+      "link": "https://example.com/turkce-videolar",
+      "repeat_after_days": 7
+    },
+    {
+      "konu": "Fizik",
+      "tip": "kitap",
+      "isim": "TYT Fizik Konu Anlatımı",
+      "zorluk": "orta",
+      "beklenen_süre_dakika": 150,
+      "öncelik": 4,
+      "link": "https://example.com/fizik-kitap",
+      "repeat_after_days": 14
+    },
+    {
+      "konu": "Kimya",
+      "tip": "soru_bankası",
+      "isim": "YKS Kimya Soru Bankası",
+      "zorluk": "zor",
+      "beklenen_süre_dakika": 100,
+      "öncelik": 3,
+      "link": "https://example.com/kimya-sorular",
+      "repeat_after_days": 5
+    },
+    {
+      "konu": "Biyoloji",
+      "tip": "online_kaynak",
+      "isim": "Biyoloji Animasyon Platformu",
+      "zorluk": "kolay",
+      "beklenen_süre_dakika": 60,
+      "öncelik": 3,
+      "link": "https://example.com/biyoloji-animasyon",
+      "repeat_after_days": 10
+    },
+    {
+      "konu": "Tarih",
+      "tip": "video",
+      "isim": "Osmanlı Tarihi Belgesel Serisi",
+      "zorluk": "kolay",
+      "beklenen_süre_dakika": 180,
+      "öncelik": 2,
+      "link": "https://example.com/tarih-belgesel",
+      "repeat_after_days": 21
+    },
+    {
+      "konu": "Coğrafya",
+      "tip": "kitap",
+      "isim": "TYT Coğrafya Atlas ve Soru Kitabı",
+      "zorluk": "orta",
+      "beklenen_süre_dakika": 120,
+      "öncelik": 3,
+      "link": "https://example.com/cografya-atlas",
+      "repeat_after_days": 14
+    }
+  ],
+  "ux_önerileri": [
+    "Planınızı takip etmek için günlük kontrol listesi kullanın",
+    "Zorlandığınız konulara ekstra zaman ayırın", 
+    "Düzenli mola vererek veriminizi artırın",
+    "Her gün minimum 1 saat TYT, 45 dakika AYT çalışın",
+    "Hafta sonları genel tekrar ve eksik konulara odaklanın"
+  ],
+  "adaptasyon_notları": "Orta seviye kullanıcı için haftada 25 saat çalışma programı. Spaced repetition algoritması ile tekrar aralıkları optimize edilmiş. Confidence scoring ile zayıf konulara daha fazla zaman ayrılmış.",
+  "confidence_overall": 0.76
+}
+

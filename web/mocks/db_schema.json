@@ -1,0 +1,220 @@
+{
+  "firestore_collections": {
+    "users": {
+      "path": "users/{userId}",
+      "documents": {
+        "profile": {
+          "schema": {
+            "kullanıcı_ID": "string (Firebase UID or guest UUID)",
+            "name": "string (User full name)",
+            "email": "string (Email address, optional for guests)",
+            "seviye": "enum ['başlangıç', 'orta', 'ileri']",
+            "haftalık_saat": "number (Weekly study hours)",
+            "hedef_tarih": "string (Target exam date YYYY-MM-DD)",
+            "field": "enum ['sayisal', 'ea', 'sozel', 'dil'] (optional)",
+            "tercihler": "object (User preferences)",
+            "createdAt": "timestamp",
+            "updatedAt": "timestamp"
+          },
+          "example": {
+            "kullanıcı_ID": "user_1234567890",
+            "name": "Ahmet Yılmaz",
+            "email": "ahmet@email.com",
+            "seviye": "orta",
+            "haftalık_saat": 25,
+            "hedef_tarih": "2024-06-15",
+            "field": "sayisal",
+            "tercihler": {
+              "study_time_preference": "morning",
+              "difficulty_preference": "challenging"
+            },
+            "createdAt": "2024-01-15T10:00:00Z",
+            "updatedAt": "2024-01-20T15:30:00Z"
+          }
+        }
+      },
+      "subcollections": {
+        "plans": {
+          "path": "users/{userId}/plans/{planId}",
+          "schema": {
+            "kullanıcı_ID": "string (User ID reference)",
+            "plan_id": "string (Unique plan identifier)",
+            "tarih": "string (Plan creation date YYYY-MM-DD)",
+            "haftalık_plan": "array (7-day study plan)",
+            "kaynak_önerileri": "array (Resource recommendations)",
+            "ux_önerileri": "array (Usage tips)",
+            "adaptasyon_notları": "string (AI adaptation notes)",
+            "confidence_overall": "number (Overall confidence 0-1)",
+            "scheduler_strategy": "string (Scheduling strategy used)",
+            "createdAt": "timestamp",
+            "updatedAt": "timestamp"
+          },
+          "example": {
+            "kullanıcı_ID": "user_1234567890",
+            "plan_id": "plan_2024_01_15",
+            "tarih": "2024-01-15",
+            "haftalık_plan": [
+              {
+                "gün": "Pazartesi",
+                "TYT": [
+                  {
+                    "konu": "Matematik",
+                    "soru_sayısı": 25,
+                    "süre_dakika": 90,
+                    "odak_konular": ["Fonksiyonlar", "Denklem sistemleri"],
+                    "confidence": 0.85,
+                    "not": "Temel kavramları pekiştir",
+                    "blok_id": "pazartesi_tyt_math_1"
+                  }
+                ],
+                "AYT": []
+              }
+            ],
+            "kaynak_önerileri": [
+              {
+                "konu": "Matematik",
+                "tip": "soru_bankası",
+                "isim": "TYT Matematik Soru Bankası",
+                "zorluk": "orta",
+                "beklenen_süre_dakika": 120,
+                "öncelik": 5,
+                "repeat_after_days": 3
+              }
+            ],
+            "ux_önerileri": [
+              "Planınızı takip etmek için günlük kontrol listesi kullanın"
+            ],
+            "adaptasyon_notları": "Orta seviye için optimize edilmiş 25 saatlik haftalık program",
+            "confidence_overall": 0.78,
+            "scheduler_strategy": "spaced-repetition",
+            "createdAt": "2024-01-15T10:00:00Z",
+            "updatedAt": "2024-01-15T10:00:00Z"
+          }
+        },
+        "progress": {
+          "path": "users/{userId}/progress/{progressId}",
+          "schema": {
+            "user_id": "string (User ID reference)",
+            "progress_id": "string (Unique progress entry ID)",
+            "blok_id": "string (StudyBlock reference)",
+            "plan_id": "string (Plan reference)",
+            "tamamlandı": "boolean (Completion status)",
+            "zaman": "string (Completion time ISO string)",
+            "performance_score": "number (Performance score 0-1, optional)",
+            "notes": "string (User notes, optional)",
+            "createdAt": "timestamp"
+          },
+          "example": {
+            "user_id": "user_1234567890",
+            "progress_id": "progress_1642234567890",
+            "blok_id": "pazartesi_tyt_math_1",
+            "plan_id": "plan_2024_01_15",
+            "tamamlandı": true,
+            "zaman": "2024-01-15T14:30:00Z",
+            "performance_score": 0.85,
+            "notes": "Fonksiyonlar konusunda zorlandım",
+            "createdAt": "2024-01-15T14:35:00Z"
+          }
+        }
+      }
+    },
+    "analytics": {
+      "path": "analytics/events/{eventId}",
+      "description": "Optional analytics collection for tracking user events",
+      "schema": {
+        "event_id": "string (Unique event identifier)",
+        "user_id": "string (User ID reference)",
+        "event_type": "string (Event type: plan_generation, progress_update, etc.)",
+        "timestamp": "timestamp (Event timestamp)",
+        "data": "object (Event-specific data)",
+        "session_id": "string (Session identifier, optional)"
+      },
+      "example": {
+        "event_id": "event_1642234567890",
+        "user_id": "user_1234567890",
+        "event_type": "plan_generation",
+        "timestamp": "2024-01-15T10:00:00Z",
+        "data": {
+          "seviye": "orta",
+          "haftalık_saat": 25,
+          "field": "sayisal",
+          "duration_ms": 1234,
+          "success": true,
+          "mock_mode": false
+        },
+        "session_id": "session_abc123"
+      }
+    }
+  },
+  "localStorage_schema": {
+    "description": "Guest user data stored in browser localStorage",
+    "keys": {
+      "guest_user_id": {
+        "type": "string",
+        "format": "guest_{timestamp}_{random}",
+        "example": "guest_1642234567890_abc123"
+      },
+      "is_guest_user": {
+        "type": "string",
+        "values": ["true", "false"],
+        "example": "true"
+      },
+      "guest_user_profile": {
+        "type": "string (JSON)",
+        "description": "Serialized UserProfile object",
+        "example": "{\"kullanıcı_ID\":\"guest_123\",\"name\":\"Misafir\",\"seviye\":\"orta\"}"
+      },
+      "guest_user_plans": {
+        "type": "string (JSON array)",
+        "description": "Serialized array of StudyPlan objects",
+        "example": "[{\"plan_id\":\"plan_1\",\"tarih\":\"2024-01-15\"}]"
+      },
+      "guest_user_progress": {
+        "type": "string (JSON array)",
+        "description": "Serialized array of UserProgress objects",
+        "example": "[{\"progress_id\":\"prog_1\",\"tamamlandı\":true}]"
+      }
+    }
+  },
+  "security_rules": {
+    "firestore": {
+      "description": "Firestore security rules for data protection",
+      "rules": "rules_version = '2'; service cloud.firestore { match /databases/{database}/documents { match /users/{userId} { allow read, write: if request.auth != null && request.auth.uid == userId; match /{document=**} { allow read, write: if request.auth != null && request.auth.uid == userId; } } match /analytics/{document} { allow read: if true; allow write: if request.auth != null; } match /{document=**} { allow read, write: if false; } } }"
+    }
+  },
+  "indexes": {
+    "firestore_indexes": [
+      {
+        "collection": "users/{userId}/progress",
+        "fields": [
+          {"fieldPath": "plan_id", "order": "ASCENDING"},
+          {"fieldPath": "createdAt", "order": "DESCENDING"}
+        ]
+      },
+      {
+        "collection": "users/{userId}/plans", 
+        "fields": [
+          {"fieldPath": "kullanıcı_ID", "order": "ASCENDING"},
+          {"fieldPath": "createdAt", "order": "DESCENDING"}
+        ]
+      }
+    ]
+  },
+  "migration_scripts": {
+    "guest_to_registered": {
+      "description": "Convert guest user data to registered user",
+      "steps": [
+        "1. Get guest data from localStorage",
+        "2. Create user profile in Firestore",
+        "3. Migrate plans with updated user_id",
+        "4. Migrate progress with updated user_id", 
+        "5. Clear localStorage guest data"
+      ]
+    },
+    "data_export": {
+      "description": "Export user data for GDPR compliance",
+      "format": "JSON",
+      "includes": ["profile", "plans", "progress", "analytics_events"]
+    }
+  }
+}

@@ -14,18 +14,38 @@ export default {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         primary: {
-          DEFAULT: '#2563eb', // Blue primary color
+          DEFAULT: '#2563EB', // Blue primary color as specified
           50: '#eff6ff',
           100: '#dbeafe',
           200: '#bfdbfe',
           300: '#93c5fd',
           400: '#60a5fa',
           500: '#3b82f6',
-          600: '#2563eb',
+          600: '#2563EB',
           700: '#1d4ed8',
           800: '#1e40af',
           900: '#1e3a8a',
           foreground: 'hsl(var(--primary-foreground))',
+        },
+        success: {
+          DEFAULT: '#16A34A',
+          50: '#f0fdf4',
+          100: '#dcfce7',
+          200: '#bbf7d0',
+          300: '#86efac',
+          400: '#4ade80',
+          500: '#22c55e',
+          600: '#16A34A',
+          700: '#15803d',
+          800: '#166534',
+          900: '#14532d',
+        },
+        muted: {
+          DEFAULT: '#6B7280',
+          foreground: 'hsl(var(--muted-foreground))',
+        },
+        bg: {
+          DEFAULT: '#F8FAFC',
         },
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
@@ -65,7 +85,7 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
       },
       borderRadius: {
         lg: 'var(--radius)',
