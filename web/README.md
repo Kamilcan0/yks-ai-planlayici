@@ -1,268 +1,480 @@
-# YKS Planlayıcı - AI Destekli Çalışma Programı
+# YKS Plan - AI Destekli Çalışma Planlayıcısı
 
-Yapay zeka destekli kişiselleştirilmiş YKS çalışma planlayıcısı. TYT ve AYT için adaptif öğrenme algoritması, spaced repetition ve confidence scoring ile maksimum verimlilik sağlar.
+![YKS Plan Logo](https://via.placeholder.com/150x150?text=YKS+Plan)
 
-## 🚀 Özellikler
+YKS'ye hazırlanan öğrenciler için yapay zeka destekli, kişiselleştirilmiş çalışma planları sunan modern web uygulaması.
 
-### 🤖 AI Entegrasyonu
-- **OpenAI GPT-3.5** ile plan oluşturma
-- **Adaptive Scheduler**: Haftalık saatlere göre optimizasyon
-- **Spaced Repetition**: Bilimsel tekrar aralıkları
-- **Confidence Scoring**: AI güven seviyesi ile konu önceliklendirme
-- **Mock Mode**: API anahtarı olmadan test edebilme
+## 🎯 Özellikler
 
-### 👥 Kullanıcı Yönetimi
-- **Firebase Auth**: Google ve e-posta ile giriş
-- **Guest Mode**: Kayıt olmadan kullanım
-- **Onboarding**: Adım adım profil oluşturma
-- **Profil Yönetimi**: Seviye, alan, hedef tarih ayarlama
+### 🤖 AI Destekli Planlama
+- **OpenAI GPT-4** entegrasyonu ile kişiselleştirilmiş haftalık planlar
+- Öğrenci seviyesi ve alanına göre özel plan üretimi
+- Akıllı kaynak önerileri ve çalışma stratejileri
 
-### 📚 Plan Özellikleri
-- **Kişiselleştirilmiş Planlar**: Seviye ve alan bazında
-- **TYT/AYT Ayrımı**: Alan bazında ders dağılımı
-- **İnteraktif PlanCard**: Genişletilir/daraltılır detay görünümü
-- **Progress Tracking**: Blok bazında tamamlanma takibi
-- **Kaynak Önerileri**: Kitap, video, soru bankası tavsiyeleri
+### 📚 Kapsamlı Kaynak Veritabanı
+- **500+** farklı çalışma kaynağı
+- Kitap, video, PDF, uygulama kategorileri
+- Seviye bazında filtrelenmiş öneriler
+- MEB onaylı resmi kaynaklar dahil
 
-### 🎨 UI/UX
-- **Modern Tasarım**: TailwindCSS ile responsive
-- **Dark/Light Mode**: Kullanıcı tercihi
-- **Animasyonlar**: Framer Motion ile
-- **Mobile-First**: Telefon dostu tasarım
-- **Inter Font**: Google Fonts entegrasyonu
+### 🎮 Gamification Sistemi
+- Puan ve rozet sistemi
+- Çalışma serileri (streak) takibi
+- Seviye ve başarım sistemi
+- Sosyal özellikler ve liderlik tablosu
 
-### 📊 Analitik & Test
-- **A/B Testing**: Kullanıcı deneyimi optimizasyonu
-- **Telemetry**: Performans ve kullanım izleme
-- **Jest Testing**: Kapsamlı test coverage
-- **Mock Data**: Test için örnek veri
+### 📱 PWA (Progressive Web App)
+- Mobil uygulama deneyimi
+- Offline çalışma desteği
+- Push notification desteği
+- Hızlı yükleme ve performans
 
-## 🛠️ Teknoloji Stack
+### 📊 Detaylı Analytics
+- Çalışma saati takibi
+- İlerleme grafikleri
+- Performans analizi
+- Haftalık raporlar
+
+### 🤝 AI Mentor
+- 7/24 yapay zeka rehberi
+- Konu bazında soru cevap
+- Motivasyon desteği
+- Kişiselleştirilmiş tavsiyeler
+
+## 🚀 Teknoloji Stack
 
 ### Frontend
-- **React 18** + **TypeScript**
-- **Vite** (build tool)
-- **TailwindCSS** (styling)
-- **Framer Motion** (animations)
-- **Zustand** (state management)
-- **Radix UI** (components)
+- **React 18** - Modern UI framework
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Utility-first CSS
+- **Framer Motion** - Animations
+- **Radix UI** - Accessible components
+- **Recharts** - Data visualization
+- **React Router** - Client-side routing
 
-### Backend
-- **Netlify Functions** (serverless)
-- **Node.js** + **Express**
-- **OpenAI API**
-- **Firebase/Firestore**
-- **Ajv** (JSON validation)
+### Backend & Database
+- **Supabase** - PostgreSQL database
+- **Supabase Auth** - Authentication
+- **Real-time subscriptions**
+- **Row Level Security (RLS)**
 
-### DevOps
-- **GitHub Actions** (CI/CD)
-- **Netlify** (hosting)
-- **Jest** (testing)
-- **ESLint** (linting)
+### AI & APIs
+- **OpenAI GPT-4** - AI plan generation
+- **OpenAI GPT-3.5-turbo** - AI mentor
+- **Custom prompt engineering**
 
-## 🚀 Kurulum
+### Development Tools
+- **Vite** - Build tool
+- **ESLint** - Code linting
+- **Jest** - Testing framework
+- **TypeScript** - Static typing
 
-### 1. Repository'yi klonla
-\`\`\`bash
-git clone https://github.com/your-username/yks-planlayici.git
-cd yks-planlayici/web
-\`\`\`
+## 🛠️ Kurulum
 
-### 2. Bağımlılıkları yükle
-\`\`\`bash
+### Gereksinimler
+- Node.js 18+ 
+- npm veya yarn
+- Supabase hesabı
+- OpenAI API anahtarı
+
+### 1. Proje Klonlama
+```bash
+git clone https://github.com/your-username/yks-plan.git
+cd yks-plan/web
+```
+
+### 2. Dependencies Kurulumu
+```bash
 npm install
-\`\`\`
+```
 
-### 3. Environment variables ayarla
-\`\`\`bash
-cp .env.example .env
-\`\`\`
+### 3. Environment Variables
+`.env` dosyası oluşturun:
+```env
+# OpenAI API Configuration
+VITE_OPENAI_API_KEY=your-openai-api-key-here
 
-\`.env\` dosyasını düzenle:
-\`\`\`env
-# OpenAI (opsiyonel - yoksa mock mode aktif)
-OPENAI_API_KEY=your_openai_api_key_here
+# Supabase Configuration
+VITE_SUPABASE_URL=your-supabase-url-here
+VITE_SUPABASE_ANON_KEY=your-supabase-anon-key-here
 
-# Mock Mode
-MOCK_MODE=false
+# Development
+VITE_NODE_ENV=development
+```
 
-# Firebase (opsiyonel - guest mode için)
-VITE_FIREBASE_API_KEY=your_firebase_api_key
-VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
-VITE_FIREBASE_PROJECT_ID=your_project_id
-VITE_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
-VITE_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
-VITE_FIREBASE_APP_ID=your_firebase_app_id
-\`\`\`
+### 4. Supabase Database Setup
+```bash
+# Supabase SQL Editor'de çalıştırın
+cat ../supabase_educational_resources_schema.sql
+```
 
-### 4. Development server başlat
-\`\`\`bash
+### 5. Geliştirme Sunucusu
+```bash
 npm run dev
-\`\`\`
+```
 
-Uygulama http://localhost:5173 adresinde çalışacak.
+Uygulama `http://localhost:5173` adresinde çalışacaktır.
 
-## 🧪 Test Etme
+## 📂 Proje Yapısı
 
-### Unit testleri çalıştır
-\`\`\`bash
-npm run test
-\`\`\`
+```
+web/
+├── public/
+│   ├── manifest.json          # PWA manifest
+│   ├── sw.js                  # Service worker
+│   └── icons/                 # PWA icons
+├── src/
+│   ├── components/
+│   │   ├── ui/                # Shared UI components
+│   │   ├── layout/            # Layout components
+│   │   └── auth/              # Authentication
+│   ├── pages/
+│   │   ├── HomePage.tsx       # Ana sayfa
+│   │   ├── SourcesPage.tsx    # Kaynak önerileri
+│   │   ├── ProfilePage.tsx    # Profil ve istatistikler
+│   │   ├── LoginPage.tsx      # Giriş sayfası
+│   │   └── RegisterPage.tsx   # Kayıt sayfası
+│   ├── lib/
+│   │   ├── ai/                # AI services
+│   │   ├── plan-generator/    # Plan generation
+│   │   ├── gamification.ts    # Gamification system
+│   │   ├── notifications.ts   # Push notifications
+│   │   ├── performance.ts     # Performance monitoring
+│   │   └── error-handling.ts  # Error handling
+│   ├── data/
+│   │   └── educational-resources.json # Eğitim kaynakları
+│   └── store/
+│       └── planStore.ts       # State management
+```
 
-### Coverage raporu
-\`\`\`bash
-npm run test:coverage
-\`\`\`
+## 🔧 Yapılandırma
 
-### E2E testler (opsiyonel)
-\`\`\`bash
-npm run test:e2e
-\`\`\`
+### Supabase Setup
 
-## 📦 Production Build
+1. **Supabase projesi oluşturun**
+2. **Database şemasını import edin:**
+   ```sql
+   -- supabase_educational_resources_schema.sql dosyasını çalıştırın
+   ```
+3. **RLS (Row Level Security) ayarlarını yapın**
+4. **API anahtarlarını `.env` dosyasına ekleyin**
 
-### 1. Build oluştur
-\`\`\`bash
-npm run build
-\`\`\`
+### OpenAI Setup
 
-### 2. Preview
-\`\`\`bash
-npm run preview
-\`\`\`
+1. **OpenAI hesabı oluşturun**
+2. **API anahtarı alın**
+3. **`.env` dosyasına ekleyin**
 
-### 3. Netlify'a deploy
-\`\`\`bash
-# Otomatik (GitHub push ile)
-git push origin main
+## 📊 Veritabanı Şeması
 
-# Manuel
-netlify deploy --prod --dir=dist
-\`\`\`
+### Ana Tablolar
 
-## 🔧 Environment Variables
+- `user_profiles` - Kullanıcı profilleri
+- `study_plans` - Çalışma planları
+- `user_progress` - İlerleme takibi
+- `educational_subjects` - Dersler
+- `educational_topics` - Konular
+- `educational_resources` - Kaynaklar
 
-### Gerekli Variables (Netlify Dashboard'da ayarla)
+### İlişkiler
 
-#### OpenAI (AI özellikleri için)
-- \`OPENAI_API_KEY\`: OpenAI API anahtarı
+```mermaid
+erDiagram
+    user_profiles ||--o{ study_plans : has
+    user_profiles ||--o{ user_progress : tracks
+    educational_subjects ||--o{ educational_topics : contains
+    educational_topics ||--o{ educational_resources : has
+```
 
-#### Firebase (auth için)
-- \`VITE_FIREBASE_API_KEY\`
-- \`VITE_FIREBASE_AUTH_DOMAIN\`
-- \`VITE_FIREBASE_PROJECT_ID\`
-- \`VITE_FIREBASE_STORAGE_BUCKET\`
-- \`VITE_FIREBASE_MESSAGING_SENDER_ID\`
-- \`VITE_FIREBASE_APP_ID\`
+## 🎮 Gamification Sistemi
 
-#### Opsiyonel
-- \`MOCK_MODE=true\`: AI olmadan test modu
-- \`NETLIFY_AUTH_TOKEN\`: Otomatik deploy için
-- \`NETLIFY_SITE_ID\`: Site ID
+### Puan Sistemi
+- **Görev tamamlama:** 10-50 puan
+- **Günlük hedef:** 25-100 puan  
+- **Haftalık hedef:** 100-300 puan
+- **Streak bonusu:** 10-50 puan/gün
 
-## 📝 API Endpoints
+### Başarımlar
+- **Çalışma saati:** 1h, 50h, 200h, 500h
+- **Seri:** 7 gün, 30 gün, 100 gün
+- **Görev:** 100, 500, 1000 görev
+- **Özel:** Erken kuş, gece kuşu, hız şeytanı
 
-### \`/api/generate-plan\`
-**POST** - AI destekli plan oluşturma
-\`\`\`json
-{
-  "kullanıcı_ID": "user123",
-  "seviye": "orta",
-  "haftalık_saat": 25,
-  "hedef_tarih": "2024-06-15",
-  "field": "sayisal"
+### Seviye Sistemi
+- **100 puan = 1 seviye**
+- **Seviye arttıkça yeni özellikler**
+- **Özel rozetler ve unvanlar**
+
+## 🔔 Push Notifications
+
+### Bildirim Türleri
+- **Günlük hatırlatmalar** (09:00, 14:00, 19:00, 21:00)
+- **Görev hatırlatmaları**
+- **Motivasyon mesajları**
+- **Haftalık raporlar**
+- **Başarım bildirimleri**
+
+### Kurulum
+```javascript
+import { notificationManager } from '@/lib/notifications'
+
+// Initialize
+await notificationManager.initialize()
+
+// Send notification
+await notificationManager.showNotification({
+  title: 'Çalışma Zamanı!',
+  body: 'Bugünkü planını tamamlamayı unutma!'
+})
+```
+
+## 🤖 AI Mentor Kullanımı
+
+### Temel Kullanım
+```javascript
+import { aiMentorService } from '@/lib/ai/mentor'
+
+// Start session
+const session = await aiMentorService.startSession(userId, 'matematik')
+
+// Send message
+const response = await aiMentorService.sendMessage(
+  session.id,
+  'Fonksiyonları anlamıyorum',
+  studyContext
+)
+```
+
+### Desteklenen Konular
+- **Matematik:** Fonksiyonlar, türev, integral, geometri
+- **Fizik:** Hareket, kuvvet, elektrik, optik
+- **Kimya:** Atom, tepkimeler, çözünürlük
+- **Türkçe:** Paragraf, dil bilgisi, kompozisyon
+- **Motivasyon:** Çalışma teknikleri, zaman yönetimi
+
+## 📈 Performance Monitoring
+
+### Otomatik İzleme
+- **Page load times**
+- **Component render times** 
+- **API response times**
+- **Memory usage**
+- **Network performance**
+
+### Manual Measurement
+```javascript
+import { performanceMonitor } from '@/lib/performance'
+
+// Measure component render
+performanceMonitor.measureComponentRender('MyComponent', () => {
+  // Render logic
+})
+
+// Measure async operation
+await performanceMonitor.measureAsyncOperation('api-call', async () => {
+  return await fetch('/api/data')
+})
+```
+
+## 🚨 Error Handling
+
+### Otomatik Hata Yakalama
+- **JavaScript errors**
+- **Unhandled promises**
+- **Network errors**
+- **Resource loading errors**
+
+### Manual Error Logging
+```javascript
+import { errorHandlingService } from '@/lib/error-handling'
+
+try {
+  // Risky operation
+} catch (error) {
+  errorHandlingService.logError({
+    message: error.message,
+    severity: 'high',
+    context: { operation: 'user-action' }
+  })
 }
-\`\`\`
+```
 
-### \`/api/user-profile/:id\`
-**GET/POST/PUT** - Kullanıcı profil yönetimi
+## 🔐 Güvenlik
 
-### \`/api/user-progress/:id\`
-**POST/GET** - Progress tracking
+### Authentication
+- **Supabase Auth** entegrasyonu
+- **JWT token** tabanlı
+- **Multi-provider** destek
+- **Session yönetimi**
 
-## 🎯 Kullanım Senaryoları
+### Authorization
+- **Row Level Security (RLS)**
+- **Role-based access**
+- **API endpoint protection**
+- **Data encryption**
 
-### 1. Yeni Kullanıcı
-1. Siteye giriş
-2. "Misafir olarak devam et" veya hesap oluştur
-3. Onboarding: ad, seviye, haftalık saat, hedef tarih, alan
-4. AI plan oluşturma
-5. Plan takibi
+### Privacy
+- **GDPR uyumlu**
+- **Veri minimizasyonu**
+- **Şifreleme**
+- **Audit logging**
 
-### 2. Mevcut Kullanıcı
-1. Giriş yap
-2. Dashboard'da progress görüntüle
-3. Yeni plan oluştur veya mevcut planı güncelle
-4. Progress kaydet
+## 📱 Mobile & PWA
 
-### 3. Guest Kullanıcı
-1. "Misafir olarak devam et"
-2. Tüm özellikler localStorage ile
-3. İsteğe bağlı hesap oluşturma
+### PWA Özellikleri
+- **Offline çalışma**
+- **App-like deneyim**
+- **Push notifications**
+- **Install prompt**
+- **Background sync**
 
-## 🔍 Acceptance Criteria
+### Responsive Design
+- **Mobile-first yaklaşım**
+- **Tablet desteği**
+- **Touch-friendly interface**
+- **Adaptive layouts**
 
-- [x] Onboarding modal çıkıyor ilk açılışta (guest/localStorage fallback)
-- [x] Yeni kullanıcı profile DB'ye kaydediliyor (ve GET ile çekilebiliyor)
-- [x] "Plan Oluştur" sonrası /api/generate-plan çağrılıyor ve JSON valid plan döndürülüyor
-- [x] PlanCard collapse/expand ve tamamlandı toggle çalışıyor
-- [x] Progress backend'e POST ediyor
-- [x] OpenAI çağrısı başarısızsa fallback statik plan gösteriyor
-- [x] Responsive tasarım ve lazy loading
-- [x] Netlify deploy konfigürasyonu
+## 🧪 Testing
 
-## 📊 Performans Optimizasyonları
+### Test Türleri
+```bash
+# Unit tests
+npm run test
 
-### Frontend
-- **Lazy Loading**: Resimler ve bileşenler
-- **Code Splitting**: Route bazında
-- **Critical CSS**: Inline styles
-- **Font Optimization**: Inter preload
-- **Image Optimization**: WebP format
+# Integration tests  
+npm run test:integration
 
-### Backend
-- **Serverless Functions**: Netlify Edge
-- **Caching**: API responses
-- **Rate Limiting**: Abuse prevention
-- **Error Handling**: Graceful degradation
+# E2E tests
+npm run test:e2e
 
-## 🤝 Katkıda Bulunma
+# Coverage report
+npm run test:coverage
+```
 
-1. Fork the repository
-2. Create feature branch (\`git checkout -b feature/amazing-feature\`)
-3. Commit changes (\`git commit -m 'Add amazing feature'\`)
-4. Push to branch (\`git push origin feature/amazing-feature\`)
-5. Open Pull Request
+### Test Yapısı
+- **Component tests** - React Testing Library
+- **Hook tests** - Custom hooks
+- **Service tests** - API services
+- **Integration tests** - User flows
 
-## 📄 Lisans
+## 🚀 Deployment
 
-Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICENSE) dosyasına bakın.
+### Production Build
+```bash
+npm run build
+```
 
-## 🆘 Sorun Giderme
+### Netlify Deployment
+1. **GitHub'a push edin**
+2. **Netlify'da proje bağlayın**
+3. **Environment variables ayarlayın**
+4. **Deploy edin**
 
-### Mock Mode Aktif
-- \`OPENAI_API_KEY\` environment variable'ı kontrol et
-- Netlify Dashboard'da variable'lar ayarlı mı?
+### Vercel Deployment
+```bash
+npm i -g vercel
+vercel --prod
+```
 
-### Firebase Auth Çalışmıyor
-- Firebase config kontrol et
-- Guest mode ile test et
+### Environment Variables (Production)
+```env
+VITE_OPENAI_API_KEY=your-production-key
+VITE_SUPABASE_URL=your-production-url
+VITE_SUPABASE_ANON_KEY=your-production-key
+VITE_NODE_ENV=production
+```
 
-### Build Hatası
-- Node version 18+ kullandığından emin ol
-- \`node_modules\` sil ve \`npm install\` yap
+## 📊 Analytics & Monitoring
 
-### Deploy Problemi
-- Environment variables Netlify'da ayarlı mı?
-- Build logs kontrol et
+### Metrics
+- **User engagement**
+- **Study completion rates**
+- **Feature usage**
+- **Performance metrics**
+- **Error rates**
 
-## 📞 İletişim
+### Monitoring Tools
+- **Custom analytics dashboard**
+- **Error tracking**
+- **Performance monitoring**
+- **User behavior analytics**
 
-- **Website**: https://symphonious-druid-2fda91.netlify.app/
-- **GitHub**: https://github.com/your-username/yks-planlayici
-- **Email**: support@kfmatematik.com
+## 🤝 Contributing
+
+### Development Workflow
+1. **Fork repository**
+2. **Create feature branch**
+3. **Make changes**
+4. **Write tests**
+5. **Submit pull request**
+
+### Code Standards
+- **TypeScript** kullanın
+- **ESLint** kurallarına uyun
+- **Prettier** formatlaması
+- **Meaningful commit messages**
+
+### Pull Request Template
+- **Açıklama:** Ne değiştirildi?
+- **Test:** Nasıl test edildi?
+- **Screenshots:** UI değişiklikleri
+- **Breaking changes:** Var mı?
+
+## 📝 License
+
+Bu proje [MIT License](LICENSE) altında lisanslanmıştır.
+
+## 👥 Team
+
+- **Lead Developer:** AI Assistant
+- **Design:** Modern UI/UX principles
+- **Backend:** Supabase integration
+- **AI:** OpenAI GPT integration
+
+## 📞 Support
+
+### Teknik Destek
+- **GitHub Issues:** Bug reports ve feature requests
+- **Email:** support@yksplan.com
+- **Discord:** Community support
+
+### Documentation
+- **API Docs:** `/docs/api`
+- **Component Docs:** `/docs/components`
+- **Deployment Guide:** `/docs/deployment`
+
+## 🔮 Roadmap
+
+### v2.0 (Q2 2024)
+- [ ] AI-powered soru çözme asistanı
+- [ ] Grup çalışma odaları
+- [ ] Live coaching sessions
+- [ ] Advanced analytics dashboard
+
+### v2.1 (Q3 2024)
+- [ ] Mobile app (React Native)
+- [ ] Offline study mode
+- [ ] Voice commands
+- [ ] AR study features
+
+### v3.0 (Q4 2024)
+- [ ] AI-generated practice tests
+- [ ] Personalized tutoring
+- [ ] Study room booking
+- [ ] VR study environments
 
 ---
 
-**kfmatematik** ile YKS hedefinize ulaşın! 🎯
+## 🙏 Acknowledgments
 
+- **OpenAI** - GPT AI services
+- **Supabase** - Backend infrastructure  
+- **Radix UI** - Component library
+- **Tailwind CSS** - Styling framework
+- **MEB** - Educational content standards
+
+---
+
+**Made with ❤️ for YKS students**
+
+*Başarıya giden yolda her adım önemli!* 🎯

@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
-import { User } from 'firebase/auth'
-import { onAuthStateChange, createGuestUser, getGuestUser, clearGuestUser, getUserProfile, UserProfile } from '@/lib/firebase'
+import { onAuthStateChange, getCurrentUser, getUserProfile, UserProfile, signOutFromSupabase } from '@/lib/supabase'
 
 interface AuthUser {
   id: string
@@ -16,6 +15,7 @@ interface AuthContextType {
   loading: boolean
   signOut: () => Promise<void>
   setProfile: (profile: UserProfile) => void
+  createGuestUser: () => void
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -38,77 +38,105 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChange(async (firebaseUser: User | null) => {
+    // Supabase auth listener
+    const { data: { subscription } } = onAuthStateChange(async (event, session) => {
       try {
-        if (firebaseUser) {
-          // Firebase authenticated user
-          const userProfile = await getUserProfile(firebaseUser.uid)
+        if (session?.user) {
+          // Supabase authenticated user
+          const userProfile = await getUserProfile(session.user.id)
           
           const authUser: AuthUser = {
-            id: firebaseUser.uid,
-            email: firebaseUser.email || undefined,
-            name: firebaseUser.displayName || userProfile?.name || 'Kullanıcı',
+            id: session.user.id,
+            email: session.user.email || undefined,
+            name: userProfile?.name || session.user.user_metadata?.name || 'Kullanıcı',
             isGuest: false,
             profile: userProfile
           }
           
           setUser(authUser)
           setProfile(userProfile)
-        } else {
-          // Check for guest user
-          const guestUser = getGuestUser()
-          if (guestUser) {
-            const guestProfile = localStorage.getItem('guest_user_profile')
-            let parsedProfile: UserProfile | null = null
-            
-            if (guestProfile) {
-              try {
-                parsedProfile = JSON.parse(guestProfile)
-              } catch (error) {
-                console.error('Error parsing guest profile:', error)
-              }
-            }
-            
-            const authUser: AuthUser = {
-              id: guestUser.id,
-              name: parsedProfile?.name || 'Misafir Kullanıcı',
-              isGuest: true,
-              profile: parsedProfile
-            }
-            
-            setUser(authUser)
-            setProfile(parsedProfile)
-          } else {
-            // No user at all
-            setUser(null)
-            setProfile(null)
-          }
+          setLoading(false)
+          return
         }
       } catch (error) {
-        console.error('Auth state change error:', error)
+        console.error('Supabase auth state change error:', error)
+      }
+      
+      // Check for guest user in localStorage
+      const guestUser = localStorage.getItem('guest_user')
+      if (guestUser) {
+        try {
+          const parsedGuestUser = JSON.parse(guestUser)
+          const guestProfile = localStorage.getItem('guest_user_profile')
+          let parsedProfile: UserProfile | null = null
+          
+          if (guestProfile) {
+            try {
+              parsedProfile = JSON.parse(guestProfile)
+            } catch (error) {
+              console.error('Error parsing guest profile:', error)
+            }
+          }
+          
+          const authUser: AuthUser = {
+            id: parsedGuestUser.id,
+            name: parsedProfile?.name || 'Misafir Kullanıcı',
+            isGuest: true,
+            profile: parsedProfile
+          }
+          
+          setUser(authUser)
+          setProfile(parsedProfile)
+        } catch (error) {
+          console.error('Error parsing guest user:', error)
+          localStorage.removeItem('guest_user')
+          localStorage.removeItem('guest_user_profile')
+        }
+      } else {
+        // No user at all
         setUser(null)
         setProfile(null)
-      } finally {
-        setLoading(false)
       }
+      setLoading(false)
     })
 
-    return () => unsubscribe()
+    return () => {
+      subscription?.unsubscribe()
+    }
   }, [])
 
   const handleSignOut = async () => {
     try {
       if (user?.isGuest) {
-        clearGuestUser()
+        localStorage.removeItem('guest_user')
+        localStorage.removeItem('guest_user_profile')
       } else {
-        const { logOut } = await import('@/lib/firebase')
-        await logOut()
+        await signOutFromSupabase()
       }
       setUser(null)
       setProfile(null)
     } catch (error) {
       console.error('Sign out error:', error)
     }
+  }
+
+  const handleCreateGuestUser = () => {
+    const guestId = `guest_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    const guestUser = {
+      id: guestId,
+      created_at: new Date().toISOString()
+    }
+    
+    localStorage.setItem('guest_user', JSON.stringify(guestUser))
+    
+    const authUser: AuthUser = {
+      id: guestId,
+      name: 'Misafir Kullanıcı',
+      isGuest: true
+    }
+    
+    setUser(authUser)
+    setProfile(null)
   }
 
   const handleSetProfile = (newProfile: UserProfile) => {
@@ -133,7 +161,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     profile,
     loading,
     signOut: handleSignOut,
-    setProfile: handleSetProfile
+    setProfile: handleSetProfile,
+    createGuestUser: handleCreateGuestUser
   }
 
   return (
@@ -145,16 +174,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
 // Hook to create guest user when needed
 export const useGuestSignIn = () => {
-  const { user } = useAuth()
+  const { createGuestUser } = useAuth()
   
-  const signInAsGuest = () => {
-    if (!user) {
-      const guestUser = createGuestUser()
-      // Force a page reload to trigger auth state change
-      window.location.reload()
-    }
-  }
-  
-  return { signInAsGuest }
+  return { signInAsGuest: createGuestUser }
 }
 

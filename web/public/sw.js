@@ -1,118 +1,70 @@
-/**
- * YKS Akıllı Asistanı - Service Worker
- * Offline çalışma, push notifications ve cache yönetimi
- */
-
-const CACHE_NAME = 'yks-ai-assistant-v1.0.0';
-const OFFLINE_URL = '/offline.html';
-
-// Cache edilecek temel dosyalar
-const STATIC_ASSETS = [
+// Service Worker for YKS Plan PWA
+const CACHE_NAME = 'yks-plan-v1'
+const urlsToCache = [
   '/',
-  '/index.html',
-  '/offline.html',
-  '/manifest.json',
-  '/icons/icon-192x192.png',
-  '/icons/icon-512x512.png'
-];
+  '/home',
+  '/sources',
+  '/profile',
+  '/login',
+  '/register',
+  '/static/js/bundle.js',
+  '/static/css/main.css',
+  '/manifest.json'
+]
 
-// Service Worker kurulum
+// Install event
 self.addEventListener('install', (event) => {
-  console.log('🚀 YKS AI Assistant Service Worker kuruldu');
-  
+  console.log('Service Worker installing...')
   event.waitUntil(
-    (async () => {
-      const cache = await caches.open(CACHE_NAME);
-      await cache.addAll(STATIC_ASSETS);
-      
-      // Offline sayfasını cache'le
-      await cache.add(new Request(OFFLINE_URL, { cache: 'reload' }));
-    })()
-  );
-  
-  // Yeni SW'yi hemen aktifleştir
-  self.skipWaiting();
-});
+    caches.open(CACHE_NAME)
+      .then((cache) => cache.addAll(urlsToCache))
+      .then(() => self.skipWaiting())
+  )
+})
 
-// Service Worker aktivasyon
+// Activate event
 self.addEventListener('activate', (event) => {
-  console.log('✅ YKS AI Assistant Service Worker aktifleşti');
-  
+  console.log('Service Worker activating...')
   event.waitUntil(
-    (async () => {
-      // Eski cache'leri temizle
-      const cacheNames = await caches.keys();
-      await Promise.all(
-        cacheNames
-          .filter(cacheName => cacheName !== CACHE_NAME)
-          .map(cacheName => caches.delete(cacheName))
-      );
-      
-      // Tüm tabları kontrol et
-      if ('clients' in self) {
-        self.clients.claim();
-      }
-    })()
-  );
-});
-
-// Network istekleri yakalama
-self.addEventListener('fetch', (event) => {
-  // Sadece HTTP(S) istekleri için
-  if (!event.request.url.startsWith('http')) return;
-  
-  event.respondWith(
-    (async () => {
-      try {
-        // Önce network'ten dene
-        const networkResponse = await fetch(event.request);
-        
-        // Başarılıysa cache'e ekle
-        if (networkResponse.ok) {
-          const cache = await caches.open(CACHE_NAME);
-          cache.put(event.request, networkResponse.clone());
-        }
-        
-        return networkResponse;
-      } catch (error) {
-        console.log('🔄 Network başarısız, cache\'ten servis ediliyor:', event.request.url);
-        
-        // Cache'ten bul
-        const cachedResponse = await caches.match(event.request);
-        if (cachedResponse) {
-          return cachedResponse;
-        }
-        
-        // HTML sayfası ise offline sayfasını göster
-        if (event.request.destination === 'document') {
-          return caches.match(OFFLINE_URL);
-        }
-        
-        // Diğer durumlarda boş response
-        return new Response(
-          JSON.stringify({ 
-            error: 'Offline mode', 
-            message: 'Bu özellik offline modda kullanılamaz' 
-          }),
-          { 
-            headers: { 'Content-Type': 'application/json' },
-            status: 503
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cacheName) => {
+          if (cacheName !== CACHE_NAME) {
+            console.log('Deleting old cache:', cacheName)
+            return caches.delete(cacheName)
           }
-        );
-      }
-    })()
-  );
-});
+        })
+      )
+    }).then(() => self.clients.claim())
+  )
+})
 
-// Push notification listener
+// Fetch event
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request)
+      .then((response) => {
+        // Return cached version or fetch from network
+        return response || fetch(event.request)
+      })
+      .catch(() => {
+        // Fallback for offline pages
+        if (event.request.destination === 'document') {
+          return caches.match('/')
+        }
+      })
+  )
+})
+
+// Push event for notifications
 self.addEventListener('push', (event) => {
-  console.log('📱 Push notification alındı:', event);
+  console.log('Push notification received:', event)
   
   const options = {
-    body: 'YKS çalışma zamanın geldi! 📚',
+    body: event.data ? event.data.text() : 'Bugünkü çalışma planını tamamlamayı unutma!',
     icon: '/icons/icon-192x192.png',
-    badge: '/icons/badge-72x72.png',
-    vibrate: [200, 100, 200],
+    badge: '/icons/icon-72x72.png',
+    vibrate: [100, 50, 100],
     data: {
       dateOfArrival: Date.now(),
       primaryKey: '1'
@@ -120,145 +72,73 @@ self.addEventListener('push', (event) => {
     actions: [
       {
         action: 'explore',
-        title: 'Planı Aç',
-        icon: '/icons/checkmark.png'
+        title: 'Planımı Görüntüle',
+        icon: '/icons/icon-96x96.png'
       },
       {
         action: 'close',
-        title: 'Daha Sonra',
-        icon: '/icons/xmark.png'
+        title: 'Kapat',
+        icon: '/icons/icon-96x96.png'
       }
-    ],
-    requireInteraction: true,
-    silent: false
-  };
-  
-  if (event.data) {
-    const data = event.data.json();
-    options.body = data.body || options.body;
-    options.data = { ...options.data, ...data };
+    ]
   }
-  
-  event.waitUntil(
-    self.registration.showNotification('YKS Akıllı Asistanı', options)
-  );
-});
 
-// Notification click handling
+  event.waitUntil(
+    self.registration.showNotification('YKS Plan Hatırlatması', options)
+  )
+})
+
+// Notification click event
 self.addEventListener('notificationclick', (event) => {
-  console.log('🔔 Notification clicked:', event);
+  console.log('Notification click received:', event)
   
-  event.notification.close();
+  event.notification.close()
   
   if (event.action === 'explore') {
-    // Ana uygulamayı aç
     event.waitUntil(
-      clients.matchAll({ type: 'window' }).then((clientList) => {
-        for (const client of clientList) {
-          if (client.url === '/' && 'focus' in client) {
-            return client.focus();
-          }
-        }
-        if (clients.openWindow) {
-          return clients.openWindow('/');
-        }
-      })
-    );
+      clients.openWindow('/home')
+    )
   } else if (event.action === 'close') {
-    // Hiçbir şey yapma, sadece kapat
-    return;
+    // Do nothing, just close
   } else {
-    // Varsayılan: uygulamayı aç
+    // Default action
     event.waitUntil(
       clients.openWindow('/')
-    );
+    )
   }
-});
+})
 
-// Background sync (gelecekte AI planı senkronizasyonu için)
+// Background sync for offline data
 self.addEventListener('sync', (event) => {
-  console.log('🔄 Background sync:', event.tag);
+  console.log('Background sync event:', event.tag)
   
-  if (event.tag === 'ai-plan-sync') {
-    event.waitUntil(syncAIPlan());
+  if (event.tag === 'study-progress-sync') {
+    event.waitUntil(syncStudyProgress())
   }
-});
+})
 
-// AI plan senkronizasyonu
-async function syncAIPlan() {
+async function syncStudyProgress() {
   try {
-    // LocalStorage'dan bekleyen verileri al
-    const pendingData = await getStorageData('pendingSync');
+    // Sync study progress when back online
+    const cache = await caches.open('study-data')
+    const offlineData = await cache.match('/offline-progress')
     
-    if (pendingData && pendingData.length > 0) {
-      // API'ye gönder
-      const response = await fetch('/api/sync-plan', {
+    if (offlineData) {
+      const data = await offlineData.json()
+      // Send to server
+      await fetch('/api/sync-progress', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(pendingData)
-      });
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
       
-      if (response.ok) {
-        // Başarılıysa pending data'yı temizle
-        await clearStorageData('pendingSync');
-        console.log('✅ AI plan başarıyla senkronize edildi');
-      }
+      // Clear offline cache
+      await cache.delete('/offline-progress')
+      console.log('Study progress synced successfully')
     }
   } catch (error) {
-    console.error('❌ AI plan senkronizasyon hatası:', error);
+    console.error('Failed to sync study progress:', error)
   }
 }
-
-// Storage helper functions
-async function getStorageData(key) {
-  return new Promise((resolve) => {
-    // IndexedDB kullanımı simülasyonu
-    resolve(null);
-  });
-}
-
-async function clearStorageData(key) {
-  return new Promise((resolve) => {
-    // IndexedDB temizleme simülasyonu
-    resolve();
-  });
-}
-
-// Mesaj dinleyici (ana uygulama ile iletişim)
-self.addEventListener('message', (event) => {
-  console.log('💬 SW mesaj alındı:', event.data);
-  
-  if (event.data && event.data.type === 'SKIP_WAITING') {
-    self.skipWaiting();
-  }
-  
-  if (event.data && event.data.type === 'SCHEDULE_NOTIFICATION') {
-    scheduleNotification(event.data.payload);
-  }
-});
-
-// Bildirim zamanlaması
-function scheduleNotification(payload) {
-  const { title, body, delay } = payload;
-  
-  setTimeout(() => {
-    self.registration.showNotification(title, {
-      body,
-      icon: '/icons/icon-192x192.png',
-      badge: '/icons/badge-72x72.png',
-      vibrate: [200, 100, 200],
-      requireInteraction: false
-    });
-  }, delay);
-}
-
-// Error handling
-self.addEventListener('error', (event) => {
-  console.error('❌ Service Worker error:', event.error);
-});
-
-self.addEventListener('unhandledrejection', (event) => {
-  console.error('❌ Service Worker unhandled rejection:', event.reason);
-});
-
-console.log('🤖 YKS AI Assistant Service Worker yüklendi');

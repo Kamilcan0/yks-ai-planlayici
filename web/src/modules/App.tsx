@@ -18,7 +18,7 @@ import { AuthProvider, useAuth } from '@/components/auth/AuthProvider'
 import { StudyPlan } from '@/lib/api'
 import { exportElementToPdf, exportWeekToExcel } from './export'
 
-const AppContent = () => {
+export const AppContent = () => {
   const { user, profile } = useAuth()
   const { 
     isDarkMode, sessions, subjects, stats,

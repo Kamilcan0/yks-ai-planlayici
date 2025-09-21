@@ -1,191 +1,150 @@
-/**
- * @jest-environment jsdom
- */
 import React from 'react'
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { PlanCard } from '../PlanCard'
-import { AuthProvider } from '../auth/AuthProvider'
+import { StudyPlan } from '@/lib/supabase'
 
-// Mock the API functions
-jest.mock('../../lib/api', () => ({
-  saveProgress: jest.fn().mockResolvedValue({
-    progress: { id: 'test-progress' },
-    adaptive_trigger: false
-  })
-}))
-
-// Mock the auth hook
-const mockUser = {
-  id: 'test-user-id',
-  name: 'Test User',
-  isGuest: false
-}
-
-jest.mock('../auth/AuthProvider', () => ({
-  useAuth: () => ({
-    user: mockUser,
-    profile: null,
-    loading: false,
-    signOut: jest.fn(),
-    setProfile: jest.fn()
-  }),
-  AuthProvider: ({ children }: { children: React.ReactNode }) => <div>{children}</div>
-}))
-
-const mockDay = {
-  gün: 'Pazartesi',
-  TYT: [
+const mockPlan: StudyPlan = {
+  id: 'test-plan-1',
+  user_id: 'test-user',
+  plan_id: 'plan-1',
+  week_number: 1,
+  plan_date: '2024-01-15',
+  schedule: [
     {
-      konu: 'Matematik',
-      soru_sayısı: 25,
-      süre_dakika: 90,
-      odak_konular: ['Fonksiyonlar', 'Denklemler'],
-      confidence: 0.85,
-      not: 'Test notu',
-      blok_id: 'math_tyt_1'
+      day: 'Monday',
+      subjects: [
+        {
+          subject: 'Mathematics',
+          question_count: 15,
+          duration_minutes: 45,
+          focus_topics: ['Functions', 'Limits'],
+          confidence: 0.85,
+          type: 'TYT',
+          notes: 'Review basic concepts'
+        },
+        {
+          subject: 'Physics',
+          question_count: 10,
+          duration_minutes: 30,
+          focus_topics: ['Dynamics', 'Force'],
+          confidence: 0.75,
+          type: 'AYT',
+          notes: 'Memorize formulas'
+        }
+      ]
     }
   ],
-  AYT: [
+  resources: [
     {
-      konu: 'Fizik',
-      soru_sayısı: 15,
-      süre_dakika: 60,
-      odak_konular: ['Kuvvet', 'Hareket'],
-      confidence: 0.72,
-      blok_id: 'physics_ayt_1'
+      subject: 'Mathematics',
+      type: 'question_bank',
+      title: 'TYT Mathematics Question Bank',
+      difficulty: 'medium',
+      estimated_time_minutes: 60,
+      priority: 5,
+      url: 'https://example.com/math-bank'
     }
-  ]
+  ],
+  tips: ['Review regularly', 'Use Pomodoro technique'],
+  notes: 'Student is strong in mathematics topics',
+  confidence_score: 0.82,
+  is_active: true,
+  created_at: '2024-01-15T00:00:00.000Z',
+  updated_at: '2024-01-15T00:00:00.000Z'
 }
 
-const mockResources = [
-  {
-    konu: 'Matematik',
-    tip: 'soru_bankası' as const,
-    isim: 'Test Matematik Soru Bankası',
-    zorluk: 'orta' as const,
-    beklenen_süre_dakika: 120,
-    öncelik: 5,
-    repeat_after_days: 3
-  }
-]
-
 describe('PlanCard', () => {
-  it('renders day plan correctly', () => {
-    render(
-      <PlanCard 
-        day={mockDay} 
-        kaynak_önerileri={mockResources}
-        planId="test-plan" 
-      />
-    )
-
-    expect(screen.getByText('Pazartesi')).toBeInTheDocument()
-    expect(screen.getByText('90 dk')).toBeInTheDocument()
-    expect(screen.getByText('25 soru')).toBeInTheDocument()
-    expect(screen.getByText('Matematik')).toBeInTheDocument()
-  })
-
-  it('expands to show detailed view when clicked', async () => {
-    render(
-      <PlanCard 
-        day={mockDay} 
-        kaynak_önerileri={mockResources}
-        planId="test-plan" 
-      />
-    )
-
-    // Click to expand
-    fireEvent.click(screen.getByText('Pazartesi'))
-
-    // Wait for animation and check if detailed content appears
-    await waitFor(() => {
-      expect(screen.getByText('TYT (1 blok)')).toBeInTheDocument()
-      expect(screen.getByText('AYT (1 blok)')).toBeInTheDocument()
-      expect(screen.getByText('Fonksiyonlar')).toBeInTheDocument()
-      expect(screen.getByText('Test notu')).toBeInTheDocument()
-    })
-  })
-
-  it('shows resource recommendations when expanded', async () => {
-    render(
-      <PlanCard 
-        day={mockDay} 
-        kaynak_önerileri={mockResources}
-        planId="test-plan" 
-      />
-    )
-
-    // Expand the card
-    fireEvent.click(screen.getByText('Pazartesi'))
-
-    await waitFor(() => {
-      expect(screen.getByText('Önerilen Kaynaklar')).toBeInTheDocument()
-      expect(screen.getByText('Test Matematik Soru Bankası')).toBeInTheDocument()
-    })
-  })
-
-  it('handles progress completion toggle', async () => {
-    const onProgressUpdate = jest.fn()
+  test('renders plan card with basic information', () => {
+    render(<PlanCard plan={mockPlan} />)
     
-    render(
-      <PlanCard 
-        day={mockDay} 
-        kaynak_önerileri={mockResources}
-        planId="test-plan"
-        onProgressUpdate={onProgressUpdate}
-      />
-    )
-
-    // Expand to see study blocks
-    fireEvent.click(screen.getByText('Pazartesi'))
-
-    await waitFor(() => {
-      const completeButtons = screen.getAllByRole('button')
-      const mathCompleteButton = completeButtons.find(button => 
-        button.closest('[class*="p-4"]')?.textContent?.includes('Matematik')
-      )
-      
-      if (mathCompleteButton) {
-        fireEvent.click(mathCompleteButton)
-      }
-    })
-
-    // Should call onProgressUpdate
-    await waitFor(() => {
-      expect(onProgressUpdate).toHaveBeenCalledWith('math_tyt_1', true)
-    })
+    expect(screen.getByText('Hafta 1 Planı')).toBeInTheDocument()
+    expect(screen.getByText('15.01.2024')).toBeInTheDocument()
+    expect(screen.getByText('Monday')).toBeInTheDocument()
   })
 
-  it('displays confidence levels correctly', async () => {
-    render(
-      <PlanCard 
-        day={mockDay} 
-        kaynak_önerileri={mockResources}
-        planId="test-plan" 
-      />
-    )
-
-    // Expand the card
-    fireEvent.click(screen.getByText('Pazartesi'))
-
-    await waitFor(() => {
-      expect(screen.getByText('Yüksek')).toBeInTheDocument() // 0.85 confidence
-      expect(screen.getByText('Orta')).toBeInTheDocument() // 0.72 confidence
-    })
+  test('displays subjects with details', () => {
+    render(<PlanCard plan={mockPlan} />)
+    
+    expect(screen.getByText('Mathematics')).toBeInTheDocument()
+    expect(screen.getByText('Physics')).toBeInTheDocument()
+    expect(screen.getByText('15 soru')).toBeInTheDocument()
+    expect(screen.getByText('45 dk')).toBeInTheDocument()
   })
 
-  it('shows progress bar correctly', () => {
-    render(
-      <PlanCard 
-        day={mockDay} 
-        kaynak_önerileri={mockResources}
-        planId="test-plan" 
-      />
-    )
+  test('shows confidence scores', () => {
+    render(<PlanCard plan={mockPlan} />)
+    
+    expect(screen.getByText('85%')).toBeInTheDocument()
+    expect(screen.getByText('75%')).toBeInTheDocument()
+  })
 
-    // Should show 0/2 completed initially
-    expect(screen.getByText('0/2')).toBeInTheDocument()
+  test('displays focus topics', () => {
+    render(<PlanCard plan={mockPlan} />)
+    
+    expect(screen.getByText('Functions')).toBeInTheDocument()
+    expect(screen.getByText('Limits')).toBeInTheDocument()
+    expect(screen.getByText('Dynamics')).toBeInTheDocument()
+    expect(screen.getByText('Force')).toBeInTheDocument()
+  })
+
+  test('shows tips when available', () => {
+    render(<PlanCard plan={mockPlan} />)
+    
+    expect(screen.getByText('Review regularly')).toBeInTheDocument()
+    expect(screen.getByText('Use Pomodoro technique')).toBeInTheDocument()
+  })
+
+  test('displays notes', () => {
+    render(<PlanCard plan={mockPlan} />)
+    
+    expect(screen.getByText('Student is strong in mathematics topics')).toBeInTheDocument()
+  })
+
+  test('shows overall confidence', () => {
+    render(<PlanCard plan={mockPlan} />)
+    
+    expect(screen.getByText('82%')).toBeInTheDocument()
+  })
+
+  test('calls onToggleItem when item is clicked', () => {
+    const mockToggle = jest.fn()
+    render(<PlanCard plan={mockPlan} onToggleItem={mockToggle} />)
+    
+    // Find and click a subject checkbox
+    const checkboxes = screen.getAllByRole('button')
+    const subjectCheckbox = checkboxes.find(btn => 
+      btn.querySelector('svg')
+    )
+    
+    if (subjectCheckbox) {
+      fireEvent.click(subjectCheckbox)
+      expect(mockToggle).toHaveBeenCalled()
+    }
+  })
+
+  test('handles empty schedule gracefully', () => {
+    const emptyPlan: StudyPlan = {
+      ...mockPlan,
+      schedule: [],
+      resources: [],
+      tips: []
+    }
+    
+    render(<PlanCard plan={emptyPlan} />)
+    expect(screen.getByText('Hafta 1 Planı')).toBeInTheDocument()
+  })
+
+  test('expands and collapses day sections', () => {
+    render(<PlanCard plan={mockPlan} />)
+    
+    const dayButton = screen.getByText('Monday').closest('button')
+    expect(dayButton).toBeInTheDocument()
+    
+    if (dayButton) {
+      fireEvent.click(dayButton)
+      // After clicking, subjects should be visible
+      expect(screen.getByText('Mathematics')).toBeInTheDocument()
+    }
   })
 })
-

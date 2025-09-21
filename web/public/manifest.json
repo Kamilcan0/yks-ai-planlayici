@@ -1,132 +1,117 @@
 {
-  "name": "YKS Akıllı Asistanı - AI Destekli Çalışma Planlayıcı",
-  "short_name": "YKS AI Asistan",
-  "description": "Yapay zeka destekli adaptif YKS çalışma planlayıcısı. Kişiselleştirilmiş ders programları, performans analizi ve akıllı öneriler.",
+  "name": "YKS Plan - AI Destekli Çalışma Planlayıcısı",
+  "short_name": "YKS Plan",
+  "description": "YKS'ye hazırlık için AI destekli kişiselleştirilmiş çalışma planları",
   "start_url": "/",
   "display": "standalone",
-  "orientation": "portrait-primary",
-  "theme_color": "#7c3aed",
   "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait-primary",
   "scope": "/",
   "lang": "tr",
-  "categories": ["education", "productivity", "lifestyle"],
-  "screenshots": [
-    {
-      "src": "/screenshots/mobile-dashboard.jpg",
-      "sizes": "640x1136",
-      "type": "image/jpeg",
-      "platform": "narrow",
-      "label": "Ana kontrol paneli görünümü"
-    },
-    {
-      "src": "/screenshots/desktop-planning.jpg", 
-      "sizes": "1280x720",
-      "type": "image/jpeg",
-      "platform": "wide",
-      "label": "AI plan üretici ekranı"
-    }
-  ],
+  "categories": ["education", "productivity"],
   "icons": [
     {
       "src": "/icons/icon-72x72.png",
       "sizes": "72x72",
       "type": "image/png",
-      "purpose": "maskable any"
+      "purpose": "any maskable"
     },
     {
       "src": "/icons/icon-96x96.png",
-      "sizes": "96x96", 
+      "sizes": "96x96",
       "type": "image/png",
-      "purpose": "maskable any"
+      "purpose": "any maskable"
     },
     {
       "src": "/icons/icon-128x128.png",
       "sizes": "128x128",
       "type": "image/png",
-      "purpose": "maskable any"
+      "purpose": "any maskable"
     },
     {
       "src": "/icons/icon-144x144.png",
       "sizes": "144x144",
       "type": "image/png",
-      "purpose": "maskable any"
+      "purpose": "any maskable"
     },
     {
       "src": "/icons/icon-152x152.png",
       "sizes": "152x152",
       "type": "image/png",
-      "purpose": "maskable any"
+      "purpose": "any maskable"
     },
     {
       "src": "/icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "maskable any"
+      "purpose": "any maskable"
     },
     {
       "src": "/icons/icon-384x384.png",
       "sizes": "384x384",
-      "type": "image/png", 
-      "purpose": "maskable any"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "/icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "maskable any"
-    },
-    {
-      "src": "/icons/apple-touch-icon.png",
-      "sizes": "180x180",
-      "type": "image/png",
-      "purpose": "maskable any"
+      "purpose": "any maskable"
     }
   ],
   "shortcuts": [
     {
-      "name": "Hızlı Plan Oluştur",
-      "short_name": "Yeni Plan",
-      "description": "Adaptif AI ile yeni çalışma planı oluştur",
-      "url": "/?action=quick-plan",
+      "name": "Bugünkü Planım",
+      "short_name": "Plan",
+      "description": "Bugünkü çalışma planımı görüntüle",
+      "url": "/home",
       "icons": [
         {
-          "src": "/icons/shortcut-plan.png",
+          "src": "/icons/icon-96x96.png",
           "sizes": "96x96"
         }
       ]
     },
     {
-      "name": "Performans Analizi",
-      "short_name": "İstatistikler",
-      "description": "Çalışma performansını analiz et",
-      "url": "/?action=analytics",
+      "name": "Kaynak Önerileri",
+      "short_name": "Kaynaklar",
+      "description": "Önerilen çalışma kaynaklarını görüntüle",
+      "url": "/sources",
       "icons": [
         {
-          "src": "/icons/shortcut-stats.png", 
+          "src": "/icons/icon-96x96.png",
           "sizes": "96x96"
         }
       ]
     },
     {
-      "name": "AI Asistan",
-      "short_name": "AI Chat",
-      "description": "Akıllı asistan ile sohbet et",
-      "url": "/?action=ai-assistant",
+      "name": "Profilim",
+      "short_name": "Profil",
+      "description": "Profil ve istatistiklerimi görüntüle",
+      "url": "/profile",
       "icons": [
         {
-          "src": "/icons/shortcut-ai.png",
+          "src": "/icons/icon-96x96.png",
           "sizes": "96x96"
         }
       ]
     }
   ],
-  "related_applications": [],
-  "prefer_related_applications": false,
-  "display_override": ["window-controls-overlay", "standalone"],
-  "edge_side_panel": {
-    "preferred_width": 400
-  },
-  "launch_handler": {
-    "client_mode": "navigate-existing"
-  }
+  "screenshots": [
+    {
+      "src": "/screenshots/desktop-home.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Ana sayfa görünümü"
+    },
+    {
+      "src": "/screenshots/mobile-home.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Mobil ana sayfa"
+    }
+  ]
 }

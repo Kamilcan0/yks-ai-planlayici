@@ -1,0 +1,71 @@
+name: Test & Quality Check
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: web/package-lock.json
+
+    - name: Install dependencies
+      run: |
+        cd web
+        npm ci
+
+    - name: Run linting
+      run: |
+        cd web
+        npm run lint
+
+    - name: Run type checking
+      run: |
+        cd web
+        npx tsc --noEmit
+
+    - name: Run tests
+      run: |
+        cd web
+        npm run test:coverage
+      env:
+        CI: true
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        directory: ./web/coverage
+        flags: unittests
+        name: codecov-umbrella
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Run security audit
+      run: |
+        cd web
+        npm audit --audit-level high
+
+    - name: Check for known vulnerabilities
+      run: |
+        cd web
+        npx audit-ci --config audit-ci.json

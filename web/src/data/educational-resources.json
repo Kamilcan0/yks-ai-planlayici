@@ -1,0 +1,1027 @@
+{
+  "dersler": [
+    {
+      "ders": "Türkçe",
+      "kategori": "TYT",
+      "alan": ["sayisal", "esit", "sozel"],
+      "konular": [
+        {
+          "konu": "Ses Bilgisi",
+          "kaynaklar": [
+            {
+              "tur": "Kitap",
+              "isim": "MEB Lisanslı Ders Kitabı - Ses Bilgisi",
+              "yayinevi": "MEB",
+              "seviye": "başlangıç",
+              "description": "Ses bilgisi konularında temel seviye kaynak",
+              "priority": 5
+            },
+            {
+              "tur": "Video",
+              "kanal": "Öğrenci Koçu (YouTube)",
+              "link": "https://youtube.com",
+              "seviye": "orta",
+              "description": "YouTube üzerinden video dersler",
+              "priority": 4
+            },
+            {
+              "tur": "PDF",
+              "baslik": "MEBİ Konu Özetleri - Türkçe",
+              "link": "https://mebi.eba.gov.tr",
+              "seviye": "orta",
+              "description": "EBA platformu konu özetleri",
+              "priority": 3
+            },
+            {
+              "tur": "Uygulama",
+              "isim": "OGM Materyal Soru Bankası",
+              "link": "https://play.google.com/store/apps/details?id=tr.gov.eba.ogmmateryalsoru",
+              "seviye": "orta",
+              "description": "Mobil uygulama soru bankası",
+              "priority": 3
+            }
+          ]
+        },
+        {
+          "konu": "Cümle Yapısı",
+          "kaynaklar": [
+            {
+              "tur": "Kitap",
+              "isim": "MEB Lisanslı Ders Kitabı - Cümle Yapısı",
+              "yayinevi": "MEB",
+              "seviye": "başlangıç",
+              "description": "Cümle yapısı konularında temel seviye kaynak",
+              "priority": 5
+            },
+            {
+              "tur": "Video",
+              "kanal": "Öğrenci Koçu (YouTube)",
+              "link": "https://youtube.com",
+              "seviye": "orta",
+              "description": "YouTube üzerinden video dersler",
+              "priority": 4
+            },
+            {
+              "tur": "PDF",
+              "baslik": "MEBİ Konu Özetleri - Türkçe",
+              "link": "https://mebi.eba.gov.tr",
+              "seviye": "orta",
+              "description": "EBA platformu konu özetleri",
+              "priority": 3
+            },
+            {
+              "tur": "Uygulama",
+              "isim": "OGM Materyal Soru Bankası",
+              "link": "https://play.google.com/store/apps/details?id=tr.gov.eba.ogmmateryalsoru",
+              "seviye": "orta",
+              "description": "Mobil uygulama soru bankası",
+              "priority": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ders": "Türk Dili ve Edebiyatı",
+      "kategori": "AYT",
+      "alan": ["esit", "sozel"],
+      "konular": [
+        {
+          "konu": "Nazım Biçimleri ve Türleri",
+          "kaynaklar": [
+            {
+              "tur": "Kitap",
+              "isim": "MEB Lisanslı Ders Kitabı - Nazım Biçimleri",
+              "yayinevi": "MEB",
+              "seviye": "başlangıç",
+              "description": "Nazım biçimleri konularında temel seviye kaynak",
+              "priority": 5
+            },
+            {
+              "tur": "Video",
+              "kanal": "Eğitim Bilgileri (YouTube)",
+              "link": "https://youtube.com",
+              "seviye": "orta",
+              "description": "YouTube üzerinden video dersler",
+              "priority": 4
+            },
+            {
+              "tur": "PDF",
+              "baslik": "MEBİ Konu Özetleri - Türk Dili ve Edebiyatı",
+              "link": "https://mebi.eba.gov.tr",
+              "seviye": "orta",
+              "description": "EBA platformu konu özetleri",
+              "priority": 3
+            },
+            {
+              "tur": "Uygulama",
+              "isim": "OGM Materyal Soru Bankası",
+              "link": "https://play.google.com/store/apps/details?id=tr.gov.eba.ogmmateryalsoru",
+              "seviye": "orta",
+              "description": "Mobil uygulama soru bankası",
+              "priority": 3
+            }
+          ]
+        },
+        {
+          "konu": "Tanzimat Edebiyatı",
+          "kaynaklar": [
+            {
+              "tur": "Kitap",
+              "isim": "MEB Lisanslı Ders Kitabı - Tanzimat Edebiyatı",
+              "yayinevi": "MEB",
+              "seviye": "başlangıç",
+              "description": "Tanzimat Edebiyatı konularında temel seviye kaynak",
+              "priority": 5
+            },
+            {
+              "tur": "Video",
+              "kanal": "Eğitim Bilgileri (YouTube)",
+              "link": "https://youtube.com",
+              "seviye": "orta",
+              "description": "YouTube üzerinden video dersler",
+              "priority": 4
+            },
+            {
+              "tur": "PDF",
+              "baslik": "MEBİ Konu Özetleri - Türk Dili ve Edebiyatı",
+              "link": "https://mebi.eba.gov.tr",
+              "seviye": "orta",
+              "description": "EBA platformu konu özetleri",
+              "priority": 3
+            },
+            {
+              "tur": "Uygulama",
+              "isim": "OGM Materyal Soru Bankası",
+              "link": "https://play.google.com/store/apps/details?id=tr.gov.eba.ogmmateryalsoru",
+              "seviye": "orta",
+              "description": "Mobil uygulama soru bankası",
+              "priority": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ders": "Matematik",
+      "kategori": "TYT",
+      "alan": ["sayisal", "esit"],
+      "konular": [
+        {
+          "konu": "Sayılar",
+          "kaynaklar": [
+            {
+              "tur": "Kitap",
+              "isim": "MEB Lisanslı Ders Kitabı - Sayılar",
+              "yayinevi": "MEB",
+              "seviye": "başlangıç",
+              "description": "Sayılar konularında temel seviye kaynak",
+              "priority": 5
+            },
+            {
+              "tur": "Video",
+              "kanal": "Khan Academy Türkçe (YouTube)",
+              "link": "https://youtube.com",
+              "seviye": "orta",
+              "description": "YouTube üzerinden video dersler",
+              "priority": 4
+            },
+            {
+              "tur": "PDF",
+              "baslik": "MEBİ Konu Özetleri - Matematik",
+              "link": "https://mebi.eba.gov.tr",
+              "seviye": "orta",
+              "description": "EBA platformu konu özetleri",
+              "priority": 3
+            },
+            {
+              "tur": "Uygulama",
+              "isim": "OGM Materyal Soru Bankası",
+              "link": "https://play.google.com/store/apps/details?id=tr.gov.eba.ogmmateryalsoru",
+              "seviye": "orta",
+              "description": "Mobil uygulama soru bankası",
+              "priority": 3
+            }
+          ]
+        },
+        {
+          "konu": "Fonksiyonlar",
+          "kaynaklar": [
+            {
+              "tur": "Kitap",
+              "isim": "MEB Lisanslı Ders Kitabı - Fonksiyonlar",
+              "yayinevi": "MEB",
+              "seviye": "başlangıç",
+              "description": "Fonksiyonlar konularında temel seviye kaynak",
+              "priority": 5
+            },
+            {
+              "tur": "Video",
+              "kanal": "Khan Academy Türkçe (YouTube)",
+              "link": "https://youtube.com",
+              "seviye": "orta",
+              "description": "YouTube üzerinden video dersler",
+              "priority": 4
+            },
+            {
+              "tur": "PDF",
+              "baslik": "MEBİ Konu Özetleri - Matematik",
+              "link": "https://mebi.eba.gov.tr",
+              "seviye": "orta",
+              "description": "EBA platformu konu özetleri",
+              "priority": 3
+            },
+            {
+              "tur": "Uygulama",
+              "isim": "OGM Materyal Soru Bankası",
+              "link": "https://play.google.com/store/apps/details?id=tr.gov.eba.ogmmateryalsoru",
+              "seviye": "orta",
+              "description": "Mobil uygulama soru bankası",
+              "priority": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ders": "Geometri",
+      "kategori": "AYT",
+      "alan": ["sayisal"],
+      "konular": [
+        {
+          "konu": "Üçgenler",
+          "kaynaklar": [
+            {
+              "tur": "Kitap",
+              "isim": "MEB Lisanslı Ders Kitabı - Üçgenler",
+              "yayinevi": "MEB",
+              "seviye": "başlangıç",
+              "description": "Üçgenler konularında temel seviye kaynak",
+              "priority": 5
+            },
+            {
+              "tur": "Video",
+              "kanal": "Khan Academy Türkçe (YouTube)",
+              "link": "https://youtube.com",
+              "seviye": "orta",
+              "description": "YouTube üzerinden video dersler",
+              "priority": 4
+            },
+            {
+              "tur": "PDF",
+              "baslik": "MEBİ Konu Özetleri - Geometri",
+              "link": "https://mebi.eba.gov.tr",
+              "seviye": "orta",
+              "description": "EBA platformu konu özetleri",
+              "priority": 3
+            },
+            {
+              "tur": "Uygulama",
+              "isim": "OGM Materyal Soru Bankası",
+              "link": "https://play.google.com/store/apps/details?id=tr.gov.eba.ogmmateryalsoru",
+              "seviye": "orta",
+              "description": "Mobil uygulama soru bankası",
+              "priority": 3
+            }
+          ]
+        },
+        {
+          "konu": "Dönüşümler",
+          "kaynaklar": [
+            {
+              "tur": "Kitap",
+              "isim": "MEB Lisanslı Ders Kitabı - Dönüşümler",
+              "yayinevi": "MEB",
+              "seviye": "başlangıç",
+              "description": "Dönüşümler konularında temel seviye kaynak",
+              "priority": 5
+            },
+            {
+              "tur": "Video",
+              "kanal": "Khan Academy Türkçe (YouTube)",
+              "link": "https://youtube.com",
+              "seviye": "orta",
+              "description": "YouTube üzerinden video dersler",
+              "priority": 4
+            },
+            {
+              "tur": "PDF",
+              "baslik": "MEBİ Konu Özetleri - Geometri",
+              "link": "https://mebi.eba.gov.tr",
+              "seviye": "orta",
+              "description": "EBA platformu konu özetleri",
+              "priority": 3
+            },
+            {
+              "tur": "Uygulama",
+              "isim": "OGM Materyal Soru Bankası",
+              "link": "https://play.google.com/store/apps/details?id=tr.gov.eba.ogmmateryalsoru",
+              "seviye": "orta",
+              "description": "Mobil uygulama soru bankası",
+              "priority": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ders": "Fizik",
+      "kategori": "AYT",
+      "alan": ["sayisal"],
+      "konular": [
+        {
+          "konu": "Kuvvet ve Hareket",
+          "kaynaklar": [
+            {
+              "tur": "Kitap",
+              "isim": "MEB Lisanslı Ders Kitabı - Kuvvet ve Hareket",
+              "yayinevi": "MEB",
+              "seviye": "başlangıç",
+              "description": "Kuvvet ve hareket konularında temel seviye kaynak",
+              "priority": 5
+            },
+            {
+              "tur": "Video",
+              "kanal": "Özcan Aykın Fizik (YouTube)",
+              "link": "https://youtube.com",
+              "seviye": "orta",
+              "description": "YouTube üzerinden video dersler",
+              "priority": 4
+            },
+            {
+              "tur": "PDF",
+              "baslik": "MEBİ Konu Özetleri - Fizik",
+              "link": "https://mebi.eba.gov.tr",
+              "seviye": "orta",
+              "description": "EBA platformu konu özetleri",
+              "priority": 3
+            },
+            {
+              "tur": "Uygulama",
+              "isim": "OGM Materyal Soru Bankası",
+              "link": "https://play.google.com/store/apps/details?id=tr.gov.eba.ogmmateryalsoru",
+              "seviye": "orta",
+              "description": "Mobil uygulama soru bankası",
+              "priority": 3
+            }
+          ]
+        },
+        {
+          "konu": "Elektrostatik",
+          "kaynaklar": [
+            {
+              "tur": "Kitap",
+              "isim": "MEB Lisanslı Ders Kitabı - Elektrostatik",
+              "yayinevi": "MEB",
+              "seviye": "başlangıç",
+              "description": "Elektrostatik konularında temel seviye kaynak",
+              "priority": 5
+            },
+            {
+              "tur": "Video",
+              "kanal": "Özcan Aykın Fizik (YouTube)",
+              "link": "https://youtube.com",
+              "seviye": "orta",
+              "description": "YouTube üzerinden video dersler",
+              "priority": 4
+            },
+            {
+              "tur": "PDF",
+              "baslik": "MEBİ Konu Özetleri - Fizik",
+              "link": "https://mebi.eba.gov.tr",
+              "seviye": "orta",
+              "description": "EBA platformu konu özetleri",
+              "priority": 3
+            },
+            {
+              "tur": "Uygulama",
+              "isim": "OGM Materyal Soru Bankası",
+              "link": "https://play.google.com/store/apps/details?id=tr.gov.eba.ogmmateryalsoru",
+              "seviye": "orta",
+              "description": "Mobil uygulama soru bankası",
+              "priority": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ders": "Kimya",
+      "kategori": "AYT",
+      "alan": ["sayisal"],
+      "konular": [
+        {
+          "konu": "Atom ve Periyodik Sistem",
+          "kaynaklar": [
+            {
+              "tur": "Kitap",
+              "isim": "MEB Lisanslı Ders Kitabı - Atom ve Periyodik Sistem",
+              "yayinevi": "MEB",
+              "seviye": "başlangıç",
+              "description": "Atom ve periyodik sistem konularında temel seviye kaynak",
+              "priority": 5
+            },
+            {
+              "tur": "Video",
+              "kanal": "KimKimdir (YouTube)",
+              "link": "https://youtube.com",
+              "seviye": "orta",
+              "description": "YouTube üzerinden video dersler",
+              "priority": 4
+            },
+            {
+              "tur": "PDF",
+              "baslik": "MEBİ Konu Özetleri - Kimya",
+              "link": "https://mebi.eba.gov.tr",
+              "seviye": "orta",
+              "description": "EBA platformu konu özetleri",
+              "priority": 3
+            },
+            {
+              "tur": "Uygulama",
+              "isim": "OGM Materyal Soru Bankası",
+              "link": "https://play.google.com/store/apps/details?id=tr.gov.eba.ogmmateryalsoru",
+              "seviye": "orta",
+              "description": "Mobil uygulama soru bankası",
+              "priority": 3
+            }
+          ]
+        },
+        {
+          "konu": "Kimyasal Tepkimeler",
+          "kaynaklar": [
+            {
+              "tur": "Kitap",
+              "isim": "MEB Lisanslı Ders Kitabı - Kimyasal Tepkimeler",
+              "yayinevi": "MEB",
+              "seviye": "başlangıç",
+              "description": "Kimyasal tepkimeler konularında temel seviye kaynak",
+              "priority": 5
+            },
+            {
+              "tur": "Video",
+              "kanal": "KimKimdir (YouTube)",
+              "link": "https://youtube.com",
+              "seviye": "orta",
+              "description": "YouTube üzerinden video dersler",
+              "priority": 4
+            },
+            {
+              "tur": "PDF",
+              "baslik": "MEBİ Konu Özetleri - Kimya",
+              "link": "https://mebi.eba.gov.tr",
+              "seviye": "orta",
+              "description": "EBA platformu konu özetleri",
+              "priority": 3
+            },
+            {
+              "tur": "Uygulama",
+              "isim": "OGM Materyal Soru Bankası",
+              "link": "https://play.google.com/store/apps/details?id=tr.gov.eba.ogmmateryalsoru",
+              "seviye": "orta",
+              "description": "Mobil uygulama soru bankası",
+              "priority": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ders": "Biyoloji",
+      "kategori": "AYT",
+      "alan": ["sayisal"],
+      "konular": [
+        {
+          "konu": "Hücre Yapısı",
+          "kaynaklar": [
+            {
+              "tur": "Kitap",
+              "isim": "MEB Lisanslı Ders Kitabı - Hücre Yapısı",
+              "yayinevi": "MEB",
+              "seviye": "başlangıç",
+              "description": "Hücre yapısı konularında temel seviye kaynak",
+              "priority": 5
+            },
+            {
+              "tur": "Video",
+              "kanal": "Müjgan Hoca (YouTube)",
+              "link": "https://youtube.com",
+              "seviye": "orta",
+              "description": "YouTube üzerinden video dersler",
+              "priority": 4
+            },
+            {
+              "tur": "PDF",
+              "baslik": "MEBİ Konu Özetleri - Biyoloji",
+              "link": "https://mebi.eba.gov.tr",
+              "seviye": "orta",
+              "description": "EBA platformu konu özetleri",
+              "priority": 3
+            },
+            {
+              "tur": "Uygulama",
+              "isim": "OGM Materyal Soru Bankası",
+              "link": "https://play.google.com/store/apps/details?id=tr.gov.eba.ogmmateryalsoru",
+              "seviye": "orta",
+              "description": "Mobil uygulama soru bankası",
+              "priority": 3
+            }
+          ]
+        },
+        {
+          "konu": "Mendel Genetiği",
+          "kaynaklar": [
+            {
+              "tur": "Kitap",
+              "isim": "MEB Lisanslı Ders Kitabı - Mendel Genetiği",
+              "yayinevi": "MEB",
+              "seviye": "başlangıç",
+              "description": "Mendel genetiği konularında temel seviye kaynak",
+              "priority": 5
+            },
+            {
+              "tur": "Video",
+              "kanal": "Müjgan Hoca (YouTube)",
+              "link": "https://youtube.com",
+              "seviye": "orta",
+              "description": "YouTube üzerinden video dersler",
+              "priority": 4
+            },
+            {
+              "tur": "PDF",
+              "baslik": "MEBİ Konu Özetleri - Biyoloji",
+              "link": "https://mebi.eba.gov.tr",
+              "seviye": "orta",
+              "description": "EBA platformu konu özetleri",
+              "priority": 3
+            },
+            {
+              "tur": "Uygulama",
+              "isim": "OGM Materyal Soru Bankası",
+              "link": "https://play.google.com/store/apps/details?id=tr.gov.eba.ogmmateryalsoru",
+              "seviye": "orta",
+              "description": "Mobil uygulama soru bankası",
+              "priority": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ders": "Tarih",
+      "kategori": "AYT",
+      "alan": ["sozel"],
+      "konular": [
+        {
+          "konu": "İlk Türk Devletleri",
+          "kaynaklar": [
+            {
+              "tur": "Kitap",
+              "isim": "MEB Lisanslı Ders Kitabı - İlk Türk Devletleri",
+              "yayinevi": "MEB",
+              "seviye": "başlangıç",
+              "description": "İlk Türk devletleri konularında temel seviye kaynak",
+              "priority": 5
+            },
+            {
+              "tur": "Video",
+              "kanal": "Rifat Hoca (YouTube)",
+              "link": "https://youtube.com",
+              "seviye": "orta",
+              "description": "YouTube üzerinden video dersler",
+              "priority": 4
+            },
+            {
+              "tur": "PDF",
+              "baslik": "MEBİ Konu Özetleri - Tarih",
+              "link": "https://mebi.eba.gov.tr",
+              "seviye": "orta",
+              "description": "EBA platformu konu özetleri",
+              "priority": 3
+            },
+            {
+              "tur": "Uygulama",
+              "isim": "OGM Materyal Soru Bankası",
+              "link": "https://play.google.com/store/apps/details?id=tr.gov.eba.ogmmateryalsoru",
+              "seviye": "orta",
+              "description": "Mobil uygulama soru bankası",
+              "priority": 3
+            }
+          ]
+        },
+        {
+          "konu": "Kurtuluş Savaşı",
+          "kaynaklar": [
+            {
+              "tur": "Kitap",
+              "isim": "MEB Lisanslı Ders Kitabı - Kurtuluş Savaşı",
+              "yayinevi": "MEB",
+              "seviye": "başlangıç",
+              "description": "Kurtuluş Savaşı konularında temel seviye kaynak",
+              "priority": 5
+            },
+            {
+              "tur": "Video",
+              "kanal": "Rifat Hoca (YouTube)",
+              "link": "https://youtube.com",
+              "seviye": "orta",
+              "description": "YouTube üzerinden video dersler",
+              "priority": 4
+            },
+            {
+              "tur": "PDF",
+              "baslik": "MEBİ Konu Özetleri - Tarih",
+              "link": "https://mebi.eba.gov.tr",
+              "seviye": "orta",
+              "description": "EBA platformu konu özetleri",
+              "priority": 3
+            },
+            {
+              "tur": "Uygulama",
+              "isim": "OGM Materyal Soru Bankası",
+              "link": "https://play.google.com/store/apps/details?id=tr.gov.eba.ogmmateryalsoru",
+              "seviye": "orta",
+              "description": "Mobil uygulama soru bankası",
+              "priority": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ders": "Coğrafya",
+      "kategori": "AYT",
+      "alan": ["sozel"],
+      "konular": [
+        {
+          "konu": "Harita Bilgisi",
+          "kaynaklar": [
+            {
+              "tur": "Kitap",
+              "isim": "MEB Lisanslı Ders Kitabı - Harita Bilgisi",
+              "yayinevi": "MEB",
+              "seviye": "başlangıç",
+              "description": "Harita bilgisi konularında temel seviye kaynak",
+              "priority": 5
+            },
+            {
+              "tur": "Video",
+              "kanal": "Hızlı Kazanım (YouTube)",
+              "link": "https://youtube.com",
+              "seviye": "orta",
+              "description": "YouTube üzerinden video dersler",
+              "priority": 4
+            },
+            {
+              "tur": "PDF",
+              "baslik": "MEBİ Konu Özetleri - Coğrafya",
+              "link": "https://mebi.eba.gov.tr",
+              "seviye": "orta",
+              "description": "EBA platformu konu özetleri",
+              "priority": 3
+            },
+            {
+              "tur": "Uygulama",
+              "isim": "OGM Materyal Soru Bankası",
+              "link": "https://play.google.com/store/apps/details?id=tr.gov.eba.ogmmateryalsoru",
+              "seviye": "orta",
+              "description": "Mobil uygulama soru bankası",
+              "priority": 3
+            }
+          ]
+        },
+        {
+          "konu": "Türkiye'de Nüfus ve Yerleşme",
+          "kaynaklar": [
+            {
+              "tur": "Kitap",
+              "isim": "MEB Lisanslı Ders Kitabı - Türkiye Nüfusu",
+              "yayinevi": "MEB",
+              "seviye": "başlangıç",
+              "description": "Türkiye nüfusu ve yerleşme konularında temel seviye kaynak",
+              "priority": 5
+            },
+            {
+              "tur": "Video",
+              "kanal": "Hızlı Kazanım (YouTube)",
+              "link": "https://youtube.com",
+              "seviye": "orta",
+              "description": "YouTube üzerinden video dersler",
+              "priority": 4
+            },
+            {
+              "tur": "PDF",
+              "baslik": "MEBİ Konu Özetleri - Coğrafya",
+              "link": "https://mebi.eba.gov.tr",
+              "seviye": "orta",
+              "description": "EBA platformu konu özetleri",
+              "priority": 3
+            },
+            {
+              "tur": "Uygulama",
+              "isim": "OGM Materyal Soru Bankası",
+              "link": "https://play.google.com/store/apps/details?id=tr.gov.eba.ogmmateryalsoru",
+              "seviye": "orta",
+              "description": "Mobil uygulama soru bankası",
+              "priority": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ders": "Felsefe",
+      "kategori": "AYT",
+      "alan": ["sozel"],
+      "konular": [
+        {
+          "konu": "Bilgi Felsefesi",
+          "kaynaklar": [
+            {
+              "tur": "Kitap",
+              "isim": "MEB Lisanslı Ders Kitabı - Bilgi Felsefesi",
+              "yayinevi": "MEB",
+              "seviye": "başlangıç",
+              "description": "Bilgi felsefesi konularında temel seviye kaynak",
+              "priority": 5
+            },
+            {
+              "tur": "Video",
+              "kanal": "Felsefe Defteri (YouTube)",
+              "link": "https://youtube.com",
+              "seviye": "orta",
+              "description": "YouTube üzerinden video dersler",
+              "priority": 4
+            },
+            {
+              "tur": "PDF",
+              "baslik": "MEBİ Konu Özetleri - Felsefe",
+              "link": "https://mebi.eba.gov.tr",
+              "seviye": "orta",
+              "description": "EBA platformu konu özetleri",
+              "priority": 3
+            },
+            {
+              "tur": "Uygulama",
+              "isim": "OGM Materyal Soru Bankası",
+              "link": "https://play.google.com/store/apps/details?id=tr.gov.eba.ogmmateryalsoru",
+              "seviye": "orta",
+              "description": "Mobil uygulama soru bankası",
+              "priority": 3
+            }
+          ]
+        },
+        {
+          "konu": "Etik ve Ahlak",
+          "kaynaklar": [
+            {
+              "tur": "Kitap",
+              "isim": "MEB Lisanslı Ders Kitabı - Etik",
+              "yayinevi": "MEB",
+              "seviye": "başlangıç",
+              "description": "Etik ve ahlak konularında temel seviye kaynak",
+              "priority": 5
+            },
+            {
+              "tur": "Video",
+              "kanal": "Felsefe Defteri (YouTube)",
+              "link": "https://youtube.com",
+              "seviye": "orta",
+              "description": "YouTube üzerinden video dersler",
+              "priority": 4
+            },
+            {
+              "tur": "PDF",
+              "baslik": "MEBİ Konu Özetleri - Felsefe",
+              "link": "https://mebi.eba.gov.tr",
+              "seviye": "orta",
+              "description": "EBA platformu konu özetleri",
+              "priority": 3
+            },
+            {
+              "tur": "Uygulama",
+              "isim": "OGM Materyal Soru Bankası",
+              "link": "https://play.google.com/store/apps/details?id=tr.gov.eba.ogmmateryalsoru",
+              "seviye": "orta",
+              "description": "Mobil uygulama soru bankası",
+              "priority": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ders": "Mantık",
+      "kategori": "AYT",
+      "alan": ["sozel"],
+      "konular": [
+        {
+          "konu": "Önerme Mantığı",
+          "kaynaklar": [
+            {
+              "tur": "Kitap",
+              "isim": "MEB Lisanslı Ders Kitabı - Mantık",
+              "yayinevi": "MEB",
+              "seviye": "başlangıç",
+              "description": "Önerme mantığı konularında temel seviye kaynak",
+              "priority": 5
+            },
+            {
+              "tur": "Video",
+              "kanal": "Felsefe Defteri (YouTube)",
+              "link": "https://youtube.com",
+              "seviye": "orta",
+              "description": "YouTube üzerinden video dersler",
+              "priority": 4
+            },
+            {
+              "tur": "PDF",
+              "baslik": "MEBİ Konu Özetleri - Mantık",
+              "link": "https://mebi.eba.gov.tr",
+              "seviye": "orta",
+              "description": "EBA platformu konu özetleri",
+              "priority": 3
+            },
+            {
+              "tur": "Uygulama",
+              "isim": "OGM Materyal Soru Bankası",
+              "link": "https://play.google.com/store/apps/details?id=tr.gov.eba.ogmmateryalsoru",
+              "seviye": "orta",
+              "description": "Mobil uygulama soru bankası",
+              "priority": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ders": "Psikoloji",
+      "kategori": "AYT",
+      "alan": ["sozel"],
+      "konular": [
+        {
+          "konu": "Öğrenme ve Hafıza",
+          "kaynaklar": [
+            {
+              "tur": "Kitap",
+              "isim": "MEB Lisanslı Ders Kitabı - Psikoloji",
+              "yayinevi": "MEB",
+              "seviye": "başlangıç",
+              "description": "Öğrenme ve hafıza konularında temel seviye kaynak",
+              "priority": 5
+            },
+            {
+              "tur": "Video",
+              "kanal": "Felsefe Defteri (YouTube)",
+              "link": "https://youtube.com",
+              "seviye": "orta",
+              "description": "YouTube üzerinden video dersler",
+              "priority": 4
+            },
+            {
+              "tur": "PDF",
+              "baslik": "MEBİ Konu Özetleri - Psikoloji",
+              "link": "https://mebi.eba.gov.tr",
+              "seviye": "orta",
+              "description": "EBA platformu konu özetleri",
+              "priority": 3
+            },
+            {
+              "tur": "Uygulama",
+              "isim": "OGM Materyal Soru Bankası",
+              "link": "https://play.google.com/store/apps/details?id=tr.gov.eba.ogmmateryalsoru",
+              "seviye": "orta",
+              "description": "Mobil uygulama soru bankası",
+              "priority": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ders": "Sosyoloji",
+      "kategori": "AYT",
+      "alan": ["sozel"],
+      "konular": [
+        {
+          "konu": "Toplumsal Kurumlar",
+          "kaynaklar": [
+            {
+              "tur": "Kitap",
+              "isim": "MEB Lisanslı Ders Kitabı - Sosyoloji",
+              "yayinevi": "MEB",
+              "seviye": "başlangıç",
+              "description": "Toplumsal kurumlar konularında temel seviye kaynak",
+              "priority": 5
+            },
+            {
+              "tur": "Video",
+              "kanal": "Felsefe Defteri (YouTube)",
+              "link": "https://youtube.com",
+              "seviye": "orta",
+              "description": "YouTube üzerinden video dersler",
+              "priority": 4
+            },
+            {
+              "tur": "PDF",
+              "baslik": "MEBİ Konu Özetleri - Sosyoloji",
+              "link": "https://mebi.eba.gov.tr",
+              "seviye": "orta",
+              "description": "EBA platformu konu özetleri",
+              "priority": 3
+            },
+            {
+              "tur": "Uygulama",
+              "isim": "OGM Materyal Soru Bankası",
+              "link": "https://play.google.com/store/apps/details?id=tr.gov.eba.ogmmateryalsoru",
+              "seviye": "orta",
+              "description": "Mobil uygulama soru bankası",
+              "priority": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ders": "Din Kültürü ve Ahlak Bilgisi",
+      "kategori": "AYT",
+      "alan": ["sozel"],
+      "konular": [
+        {
+          "konu": "İbadetler",
+          "kaynaklar": [
+            {
+              "tur": "Kitap",
+              "isim": "MEB Lisanslı Ders Kitabı - İbadetler",
+              "yayinevi": "MEB",
+              "seviye": "başlangıç",
+              "description": "İbadetler konularında temel seviye kaynak",
+              "priority": 5
+            },
+            {
+              "tur": "Video",
+              "kanal": "Gaye Hoca (YouTube)",
+              "link": "https://youtube.com",
+              "seviye": "orta",
+              "description": "YouTube üzerinden video dersler",
+              "priority": 4
+            },
+            {
+              "tur": "PDF",
+              "baslik": "MEBİ Konu Özetleri - Din Kültürü ve Ahlak Bilgisi",
+              "link": "https://mebi.eba.gov.tr",
+              "seviye": "orta",
+              "description": "EBA platformu konu özetleri",
+              "priority": 3
+            },
+            {
+              "tur": "Uygulama",
+              "isim": "OGM Materyal Soru Bankası",
+              "link": "https://play.google.com/store/apps/details?id=tr.gov.eba.ogmmateryalsoru",
+              "seviye": "orta",
+              "description": "Mobil uygulama soru bankası",
+              "priority": 3
+            }
+          ]
+        },
+        {
+          "konu": "Laiklik ve Dinin Rolü",
+          "kaynaklar": [
+            {
+              "tur": "Kitap",
+              "isim": "MEB Lisanslı Ders Kitabı - Laiklik",
+              "yayinevi": "MEB",
+              "seviye": "başlangıç",
+              "description": "Laiklik ve dinin rolü konularında temel seviye kaynak",
+              "priority": 5
+            },
+            {
+              "tur": "Video",
+              "kanal": "Gaye Hoca (YouTube)",
+              "link": "https://youtube.com",
+              "seviye": "orta",
+              "description": "YouTube üzerinden video dersler",
+              "priority": 4
+            },
+            {
+              "tur": "PDF",
+              "baslik": "MEBİ Konu Özetleri - Din Kültürü ve Ahlak Bilgisi",
+              "link": "https://mebi.eba.gov.tr",
+              "seviye": "orta",
+              "description": "EBA platformu konu özetleri",
+              "priority": 3
+            },
+            {
+              "tur": "Uygulama",
+              "isim": "OGM Materyal Soru Bankası",
+              "link": "https://play.google.com/store/apps/details?id=tr.gov.eba.ogmmateryalsoru",
+              "seviye": "orta",
+              "description": "Mobil uygulama soru bankası",
+              "priority": 3
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
